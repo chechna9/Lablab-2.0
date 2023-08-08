@@ -2,7 +2,7 @@ import 'package:lablab2/res/drawable/drawable.dart';
 
 class AppDrawable extends Drawable {
   @override
-  String get elipse => '${imagesPath}Ellipse.svg';
+  String get ellipse => '${imagesPath}Ellipse.svg';
 
   @override
   String get rectangle => '${imagesPath}Rectangle.svg';
