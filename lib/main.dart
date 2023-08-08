@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lablab2/dep_inj.dart';
+import 'package:lablab2/res/res_extension.dart';
 
 void main() {
   DepInj.setup();
@@ -35,8 +37,10 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
-        child: Text('Hello World'),
+      body: Center(
+        child: SvgPicture.asset(
+          context.res.drawable.rectangle,
+        ),
       ),
     );
   }

@@ -5,9 +5,8 @@ import 'package:lablab2/res/drawable/drawable.dart';
 import 'package:lablab2/res/styles/text_styles.dart';
 
 class Resources {
+  Resources();
   BaseColors get colors => AppColors();
   Drawable get drawable => AppDrawable();
   AppStyles get styles => AppStyles();
-
-  Resources();
 }
