@@ -25,7 +25,9 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<Offset> __budSlideAnimation;
   late Animation<double> __budFadeAnimation;
   late Animation<double> __logoScaleAnimation;
-  late Animation<double> __imagesPulseAnimation;
+  late Animation<double> _firstImagesPulseAnimation;
+  late Animation<double> _secondImagesPulseAnimation;
+  late Animation<double> _thirdImagesPulseAnimation;
   late Animation<double> _rotationAnimation;
   late Animation<double> _xSlideAnimation;
 
@@ -113,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    __imagesPulseAnimation = Tween<double>(
+    _firstImagesPulseAnimation = Tween<double>(
       begin: 0,
       end: 1,
     ).animate(
@@ -122,6 +124,33 @@ class _SplashScreenState extends State<SplashScreen>
         curve: const Interval(
           0.6,
           0.9,
+          curve: Curves.elasticOut,
+        ),
+      ),
+    );
+    _secondImagesPulseAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(
+          0.7,
+          1,
+          curve: Curves.elasticOut,
+        ),
+      ),
+    );
+
+    _thirdImagesPulseAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(
+          0.8,
+          1,
           curve: Curves.elasticOut,
         ),
       ),
@@ -223,7 +252,7 @@ class _SplashScreenState extends State<SplashScreen>
             top: context.res.dimens.screenHeight * 0.05,
             left: -60,
             child: ScaleTransition(
-              scale: __imagesPulseAnimation,
+              scale: _firstImagesPulseAnimation,
               child: Transform.rotate(
                 angle: -pi / 6,
                 child: SvgPicture.asset(
@@ -236,7 +265,7 @@ class _SplashScreenState extends State<SplashScreen>
             top: context.res.dimens.screenHeight * 0.2,
             right: -50,
             child: ScaleTransition(
-              scale: __imagesPulseAnimation,
+              scale: _secondImagesPulseAnimation,
               child: SvgPicture.asset(
                 context.res.drawable.ellipse,
                 width: 150,
@@ -247,7 +276,7 @@ class _SplashScreenState extends State<SplashScreen>
             top: context.res.dimens.screenHeight * 0.7,
             left: 0,
             child: ScaleTransition(
-              scale: __imagesPulseAnimation,
+              scale: _thirdImagesPulseAnimation,
               child: SvgPicture.asset(
                 context.res.drawable.star,
                 width: 150,

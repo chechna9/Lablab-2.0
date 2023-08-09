@@ -27,10 +27,13 @@ class _SignUpState extends State<SignUp> {
           Positioned(
             top: -topCircleSize * 0.6,
             left: -topCircleSize / 2,
-            child: Circle.sameSize(
-              color: context.res.colors.lightPurple,
-              strockWidth: 3,
-              size: topCircleSize,
+            child: Hero(
+              tag: "topCircle",
+              child: Circle.sameSize(
+                color: context.res.colors.lightPurple,
+                strockWidth: 3,
+                size: topCircleSize,
+              ),
             ),
           ),
           // bottom circles

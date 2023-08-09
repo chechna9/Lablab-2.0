@@ -28,8 +28,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       onGenerateRoute: DepInj.locator<AppRouter>().onGenerateRoute,
-      initialRoute: '/los',
-      // initialRoute: DepInj.locator<AppRouter>().splashRoute,
+      initialRoute: DepInj.locator<AppRouter>().splashRoute,
     );
   }
 }

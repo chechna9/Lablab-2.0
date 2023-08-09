@@ -13,12 +13,14 @@ class SignInUP extends StatefulWidget {
 
 class _SignInUPState extends State<SignInUP> {
   double _yOffset = 1;
+  double _opacity = 0;
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 300), () {
       setState(() {
         _yOffset = 0;
+        _opacity = 1;
       });
     });
   }
@@ -37,17 +39,20 @@ class _SignInUPState extends State<SignInUP> {
           Positioned(
             top: -topCircleSize / 2,
             left: -topCircleSize / 2,
-            child: Circle.sameSize(
-              color: context.res.colors.lightPurple,
-              strockWidth: 3,
-              size: topCircleSize,
-              children: [
-                Circle.sameSize(
-                  color: context.res.colors.lightPurple,
-                  strockWidth: 2,
-                  size: topCircleSize - 40,
-                ),
-              ],
+            child: Hero(
+              tag: "topCircle",
+              child: Circle.sameSize(
+                color: context.res.colors.lightPurple,
+                strockWidth: 3,
+                size: topCircleSize,
+                children: [
+                  Circle.sameSize(
+                    color: context.res.colors.lightPurple,
+                    strockWidth: 2,
+                    size: topCircleSize - 40,
+                  ),
+                ],
+              ),
             ),
           ),
           // bottom circles
@@ -75,26 +80,38 @@ class _SignInUPState extends State<SignInUP> {
           Positioned(
             top: topOffset + 40,
             left: context.res.dimens.screenWidth * 0.15,
-            child: SvgPicture.asset(
-              context.res.drawable.star,
-              width: 100,
+            child: AnimatedOpacity(
+              opacity: _opacity,
+              duration: const Duration(milliseconds: 300),
+              child: SvgPicture.asset(
+                context.res.drawable.star,
+                width: 100,
+              ),
             ),
           ),
 
           Positioned(
             top: topOffset + 120,
             left: context.res.dimens.screenWidth * 0.4,
-            child: SvgPicture.asset(
-              context.res.drawable.star,
-              width: 70,
+            child: AnimatedOpacity(
+              opacity: _opacity,
+              duration: const Duration(milliseconds: 300),
+              child: SvgPicture.asset(
+                context.res.drawable.star,
+                width: 70,
+              ),
             ),
           ),
           Positioned(
             top: topOffset,
             right: context.res.dimens.screenWidth * 0.1,
-            child: SvgPicture.asset(
-              context.res.drawable.star,
-              width: 150,
+            child: AnimatedOpacity(
+              opacity: _opacity,
+              duration: const Duration(milliseconds: 300),
+              child: SvgPicture.asset(
+                context.res.drawable.star,
+                width: 150,
+              ),
             ),
           ),
           AnimatedSlide(
