@@ -16,7 +16,7 @@ class _SignInUPState extends State<SignInUP> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       setState(() {
         _yOffset = 0;
       });
@@ -100,7 +100,7 @@ class _SignInUPState extends State<SignInUP> {
           AnimatedSlide(
             offset: Offset(0, _yOffset),
             curve: Curves.fastOutSlowIn,
-            duration: const Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 500),
             child: const Align(
               alignment: Alignment.bottomCenter,
               child: LoginOrSignUPCard(),

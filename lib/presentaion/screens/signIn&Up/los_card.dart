@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/presentaion/shared_widgets/text_button.dart';
 import 'package:lablab2/res/res_extension.dart';
+import 'package:lablab2/routes/app_router.dart';
+import 'package:lablab2/routes/screens_enum.dart';
 
 class LoginOrSignUPCard extends StatelessWidget {
   const LoginOrSignUPCard({super.key});
@@ -36,14 +39,18 @@ class LoginOrSignUPCard extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             MyTextButton(
-              onPressed: () {},
+              onPressed: () {
+                DepInj.locator<AppRouter>().push(context, Screens.signIn);
+              },
               text: 'Login',
               textColor: context.res.colors.white,
               bgColor: context.res.colors.purple,
             ),
             const SizedBox(height: 16),
             MyTextButton(
-              onPressed: () {},
+              onPressed: () {
+                DepInj.locator<AppRouter>().push(context, Screens.signUp);
+              },
               text: 'Create an account',
               textColor: const Color(0XFF6A5AE0),
               bgColor: const Color(0XffE6E6E6),

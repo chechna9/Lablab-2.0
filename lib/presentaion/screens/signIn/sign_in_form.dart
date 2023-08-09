@@ -9,22 +9,22 @@ import 'package:lablab2/routes/app_router.dart';
 import 'package:lablab2/routes/screens_enum.dart';
 import 'package:lablab2/utils/validators.dart';
 
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
+class SignInForm extends StatefulWidget {
+  const SignInForm({super.key});
 
   @override
-  State<SignUpForm> createState() => _SignUpFormState();
+  State<SignInForm> createState() => _SignInFormState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+class _SignInFormState extends State<SignInForm> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  bool _termsAndConditions = false;
   @override
   void dispose() {
     _emailController.dispose();
+    _passwordController.dispose();
+
     super.dispose();
   }
 
@@ -32,23 +32,19 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: Form(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Create an account",
+                "Sign In",
                 style: context.res.styles.heading.copyWith(
                   color: context.res.colors.black,
                 ),
               ),
               const SizedBox(
                 height: 30,
-              ),
-              LabledTextInput(
-                label: 'Name',
-                controller: _nameController,
-                validator: Validators.emailValidator,
               ),
               SizedBox(
                 height: context.res.dimens.labelFieldMargin,
@@ -70,51 +66,27 @@ class _SignUpFormState extends State<SignUpForm> {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Checkbox(
-                    value: _termsAndConditions,
-                    onChanged: (changed) {
-                      setState(() {
-                        _termsAndConditions = changed!;
-                      });
-                    },
-                    fillColor: MaterialStateProperty.all(
-                      context.res.colors.green,
-                    ),
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      text: 'I agree to the ',
-                      style: context.res.styles.body.copyWith(
-                        color: context.res.colors.gray,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: 'Terms',
-                          style: context.res.styles.body.copyWith(
-                            color: context.res.colors.green,
-                          ),
-                        ),
-                        const TextSpan(
-                          text: ' and',
-                        ),
-                        TextSpan(
-                          text: ' Privacy Policy.',
-                          style: context.res.styles.body.copyWith(
-                            color: context.res.colors.green,
-                          ),
-                        ),
-                      ],
-                    ),
+                  Text(
+                    'Forgot your password? ',
                     style: context.res.styles.body.copyWith(
                       color: context.res.colors.gray,
                     ),
                   ),
+                  MyTextButton(
+                    onPressed: () {},
+                    text: 'Click here',
+                    textColor: context.res.colors.green,
+                  )
                 ],
+              ),
+              const SizedBox(
+                height: 20,
               ),
               MyTextButton(
                 onPressed: () {},
-                text: 'Create an account',
+                text: 'Sign In',
                 bgColor: context.res.colors.purple,
               ),
               const SizedBox(
@@ -127,7 +99,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Sign up with Google",
+                      "Sign in with Google",
                       style: context.res.styles.buttons.copyWith(
                         color: context.res.colors.white,
                       ),
@@ -148,7 +120,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have an account? ',
+                    'Don\'t have an account? ',
                     style: context.res.styles.body.copyWith(
                       color: context.res.colors.gray,
                     ),
@@ -157,9 +129,9 @@ class _SignUpFormState extends State<SignUpForm> {
                     onPressed: () {
                       DepInj.locator
                           .get<AppRouter>()
-                          .pushReplacement(context, Screens.signIn);
+                          .pushReplacement(context, Screens.signUp);
                     },
-                    text: 'Sign In',
+                    text: 'Sign Up',
                     textColor: context.res.colors.green,
                   )
                 ],

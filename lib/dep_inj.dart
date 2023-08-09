@@ -1,9 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:lablab2/routes/app_router.dart';
 
 class DepInj {
   static final GetIt locator = GetIt.instance;
 
   static void setup() {
-    return;
+    locator.registerLazySingleton(() => AppRouter());
   }
 }
