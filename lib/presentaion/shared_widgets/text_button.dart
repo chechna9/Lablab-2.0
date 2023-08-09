@@ -3,15 +3,17 @@ import 'package:lablab2/res/res_extension.dart';
 
 class MyTextButton extends StatelessWidget {
   final void Function() onPressed;
-  final String text;
+  final String? text;
   final Color? bgColor;
   final Color? textColor;
+  final Widget? child;
   const MyTextButton({
     super.key,
     required this.onPressed,
-    required this.text,
+    this.text,
     this.bgColor,
     this.textColor,
+    this.child,
   });
 
   @override
@@ -25,12 +27,13 @@ class MyTextButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
-      child: Text(
-        text,
-        style: context.res.styles.buttons.copyWith(
-          color: textColor,
-        ),
-      ),
+      child: child ??
+          Text(
+            text ?? "",
+            style: context.res.styles.buttons.copyWith(
+              color: textColor,
+            ),
+          ),
     );
   }
 }

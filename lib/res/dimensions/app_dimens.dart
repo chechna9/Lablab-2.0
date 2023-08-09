@@ -13,4 +13,10 @@ class AppDimensions extends Dimensions {
 
   @override
   double get cardMargin => 24;
+
+  @override
+  double get contentPadding => 40;
+
+  @override
+  double get labelFieldMargin => 10;
 }

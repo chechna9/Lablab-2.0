@@ -174,7 +174,7 @@ class _SplashScreenState extends State<SplashScreen>
                 Circle.sameSize(
                   color: context.res.colors.lightPurple,
                   strockWidth: 2,
-                  size: topCircleSize * 0.9,
+                  size: topCircleSize - 40,
                 ),
               ],
             ),
@@ -203,7 +203,7 @@ class _SplashScreenState extends State<SplashScreen>
                         Circle.sameSize(
                           color: context.res.colors.lightPurple,
                           strockWidth: 2,
-                          size: bottomCircleSize * 0.8,
+                          size: bottomCircleSize - 30,
                         ),
                         SvgPicture.asset(
                           context.res.drawable.rectangle,

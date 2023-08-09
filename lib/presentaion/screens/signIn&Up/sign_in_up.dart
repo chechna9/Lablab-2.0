@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lablab2/presentaion/screens/signIn&Up/los_card.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/res/res_extension.dart';
-import 'package:vector_math/vector_math_64.dart';
 
 class SignInUP extends StatefulWidget {
   const SignInUP({super.key});
@@ -46,7 +45,7 @@ class _SignInUPState extends State<SignInUP> {
                 Circle.sameSize(
                   color: context.res.colors.lightPurple,
                   strockWidth: 2,
-                  size: topCircleSize * 0.9,
+                  size: topCircleSize - 40,
                 ),
               ],
             ),
@@ -63,7 +62,7 @@ class _SignInUPState extends State<SignInUP> {
                 Circle.sameSize(
                   color: context.res.colors.lightPurple,
                   strockWidth: 2,
-                  size: bottomCircleSize * 0.8,
+                  size: bottomCircleSize - 30,
                 ),
                 SvgPicture.asset(
                   context.res.drawable.rectangle,

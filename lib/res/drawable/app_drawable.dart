@@ -12,4 +12,7 @@ class AppDrawable extends Drawable {
 
   @override
   String get triangle => '${imagesPath}Triangle.svg';
+
+  @override
+  String get googleWhiteLogo => '${imagesPath}google_white_logo.svg';
 }

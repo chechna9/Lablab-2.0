@@ -5,4 +5,5 @@ abstract class Drawable {
   String get ellipse;
   String get rectangle;
   String get triangle;
+  String get googleWhiteLogo;
 }
