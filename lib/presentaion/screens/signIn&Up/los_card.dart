@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lablab2/presentaion/shared_widgets/text_button.dart';
 import 'package:lablab2/res/res_extension.dart';
 
 class LoginOrSignUPCard extends StatelessWidget {
@@ -34,54 +35,24 @@ class LoginOrSignUPCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            TextButton(
+            MyTextButton(
               onPressed: () {},
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: context.res.colors.purple,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-              child: Text(
-                'Login',
-                style: context.res.styles.buttons.copyWith(
-                  color: context.res.colors.white,
-                ),
-              ),
+              text: 'Login',
+              textColor: context.res.colors.white,
+              bgColor: context.res.colors.purple,
             ),
             const SizedBox(height: 16),
-            TextButton(
+            MyTextButton(
               onPressed: () {},
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: const Color(0XffE6E6E6),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-              child: Text(
-                'Create an account',
-                style: context.res.styles.buttons.copyWith(
-                  color: const Color(0XFF6A5AE0),
-                ),
-              ),
+              text: 'Create an account',
+              textColor: const Color(0XFF6A5AE0),
+              bgColor: const Color(0XffE6E6E6),
             ),
             const SizedBox(height: 16),
-            TextButton(
+            MyTextButton(
               onPressed: () {},
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-              child: Text(
-                'Later',
-                style: context.res.styles.buttons.copyWith(
-                  color: const Color(0Xff858494),
-                ),
-              ),
+              text: 'Later',
+              textColor: const Color(0Xff858494),
             ),
           ],
         ),
