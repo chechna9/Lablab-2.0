@@ -151,7 +151,7 @@ class _SplashScreenState extends State<SplashScreen>
         ),
       ),
     );
-    _animationController.repeat();
+    _animationController.forward();
   }
 
   @override

@@ -10,4 +10,7 @@ class AppDimensions extends Dimensions {
 
   @override
   double get screenWidth => MediaQuery.of(context).size.width;
+
+  @override
+  double get cardMargin => 24;
 }
