@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lablab2/presentaion/screens/main/field_card.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/presentaion/shared_widgets/search_input.dart';
 import 'package:lablab2/res/res_extension.dart';
@@ -63,6 +64,7 @@ class MainScreen extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,12 +91,9 @@ class MainScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      radius: context.res.dimens.avatarRadius,
-                      backgroundImage: AssetImage(
-                        context.res.drawable.avatar,
-                      ),
+                    Image.asset(
+                      context.res.drawable.avatar,
+                      width: context.res.dimens.avatarRadius,
                     ),
                   ],
                 ),
@@ -103,6 +102,26 @@ class MainScreen extends StatelessWidget {
                     horizontal: 30,
                   ),
                   child: SearchInput(),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Lorem ipsum dolor sit amet consectetur. Neque sit vitae nunc mi varius scelerisque turpis.",
+                  style: context.res.styles.body,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      FieldCard(),
+                      FieldCard(),
+                      FieldCard(),
+                    ],
+                  ),
                 ),
               ],
             ),
