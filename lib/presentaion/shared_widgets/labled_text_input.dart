@@ -41,6 +41,7 @@ class LabledTextInput extends StatelessWidget {
               horizontal: 15,
               vertical: 15,
             ),
+            filled: true,
             fillColor: const Color(0XffFDFDFD),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(50),

@@ -15,4 +15,10 @@ class AppDrawable extends Drawable {
 
   @override
   String get googleWhiteLogo => '${imagesPath}google_white_logo.svg';
+
+  @override
+  String get avatar => '${imagesPath}avatar.png';
+
+  @override
+  String get goldenStar => '${imagesPath}golden_star.png';
 }

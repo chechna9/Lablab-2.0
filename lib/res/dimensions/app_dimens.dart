@@ -19,4 +19,9 @@ class AppDimensions extends Dimensions {
 
   @override
   double get labelFieldMargin => 10;
+  @override
+  double get mainPadding => 22;
+
+  @override
+  double get avatarRadius => 60;
 }

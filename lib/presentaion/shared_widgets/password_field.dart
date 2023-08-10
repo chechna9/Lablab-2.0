@@ -58,6 +58,7 @@ class _PasswordFieldState extends State<PasswordField> {
                 color: context.res.colors.gray,
               ),
             ),
+            filled: true,
             fillColor: const Color(0XffFDFDFD),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(50),

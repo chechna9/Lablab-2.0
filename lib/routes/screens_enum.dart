@@ -1,1 +1,1 @@
-enum Screens { splash, los, signUp, signIn }
+enum Screens { splash, los, signUp, signIn, main }
