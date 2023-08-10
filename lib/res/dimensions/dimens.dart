@@ -4,6 +4,7 @@ abstract class Dimensions {
   double get cardMargin;
   double get contentPadding;
   double get labelFieldMargin;
+  double get topMargin;
   double get mainPadding;
   double get avatarRadius;
 }

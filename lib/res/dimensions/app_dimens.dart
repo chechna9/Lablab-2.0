@@ -24,4 +24,7 @@ class AppDimensions extends Dimensions {
 
   @override
   double get avatarRadius => 60;
+
+  @override
+  double get topMargin => 40;
 }

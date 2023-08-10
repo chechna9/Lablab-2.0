@@ -8,7 +8,10 @@ class FieldCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: context.res.colors.white,
-      margin: EdgeInsets.all(context.res.dimens.cardMargin),
+      margin: EdgeInsets.symmetric(
+        horizontal: context.res.dimens.cardMargin,
+        vertical: context.res.dimens.cardMargin / 4,
+      ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: EdgeInsets.symmetric(

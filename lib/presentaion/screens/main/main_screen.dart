@@ -57,10 +57,13 @@ class MainScreen extends StatelessWidget {
         children: [
           ...backgroundCircles,
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: context.res.dimens.mainPadding,
+            padding: EdgeInsets.only(
+              left: context.res.dimens.mainPadding,
+              right: context.res.dimens.mainPadding,
+              top: context.res.dimens.topMargin,
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,6 +100,9 @@ class MainScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
                 const Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 30,
@@ -114,15 +120,46 @@ class MainScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  child: Column(
-                    children: [
-                      FieldCard(),
-                      FieldCard(),
-                      FieldCard(),
-                    ],
+                Expanded(
+                  child: Container(
+                    // clipBehavior: Clip.hardEdge,
+
+                    decoration: BoxDecoration(
+                      color: context.res.colors.lightPurple,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: ListView(
+                      physics: const BouncingScrollPhysics(),
+                      children: const [
+                        FieldCard(),
+                        FieldCard(),
+                        FieldCard(),
+                        FieldCard()
+                      ],
+                    ),
                   ),
                 ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ShaderMask(
+                    shaderCallback: (Rect bounds) => LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        context.res.colors.white,
+                        context.res.colors.gray,
+                      ],
+                    ).createShader(bounds),
+                    child: IconButton(
+                      iconSize: 60,
+                      splashRadius: 35,
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.add_circle_rounded,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           )
