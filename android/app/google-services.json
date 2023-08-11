@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "655240398483",
+    "project_id": "curious-bud",
+    "storage_bucket": "curious-bud.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655240398483:android:9771bb38f26c1c0ac6ef66",
+        "android_client_info": {
+          "package_name": "com.example.lablab2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655240398483-mc5rc0j2qo1q829b5t8i7ln4ups2ceab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS_ks-vMjahy4yV4lFW_fgHSbxkuXKtV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655240398483-mc5rc0j2qo1q829b5t8i7ln4ups2ceab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

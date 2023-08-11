@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>655240398483-71a6kup4gkk3h1tdb50k4h2tbpnd14a3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.655240398483-71a6kup4gkk3h1tdb50k4h2tbpnd14a3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCv9m_q6JTApZzfFUrzkWiZ29JuBjUUUrM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>655240398483</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.lablab2.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>curious-bud</string>
+	<key>STORAGE_BUCKET</key>
+	<string>curious-bud.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:655240398483:ios:1d38ef8fc5c9dc9ac6ef66</string>
+</dict>
+</plist>
