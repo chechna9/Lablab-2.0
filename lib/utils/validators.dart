@@ -21,4 +21,14 @@ class Validators {
     }
     return null;
   }
+
+  static String? name(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter some text';
+    }
+    if (value.length < 3) {
+      return 'Name must be at least 3 characters long';
+    }
+    return null;
+  }
 }

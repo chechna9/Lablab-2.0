@@ -1,9 +1,13 @@
 // ignore_for_file: unused_import
 
+import 'package:flutter/material.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:lablab2/bloc/auth/auth_cubit.dart';
 import 'package:lablab2/bloc/bloc_observer.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/firebase_options.dart';
@@ -30,14 +34,17 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: MaterialApp(
+        title: 'LabLab',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.dark,
+        ),
+        onGenerateRoute: DepInj.locator<AppRouter>().onGenerateRoute,
+        initialRoute: DepInj.locator<AppRouter>().mainContentRoute,
       ),
-      onGenerateRoute: DepInj.locator<AppRouter>().onGenerateRoute,
-      initialRoute: DepInj.locator<AppRouter>().mainContentRoute,
     );
   }
 }

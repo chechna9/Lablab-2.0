@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lablab2/data/models/chapter%20_model/chapter.dart';
-import 'package:lablab2/data/models/field_model/content_model.dart';
+import 'package:lablab2/data/models/content_model/content_model.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/res/res_extension.dart';
 

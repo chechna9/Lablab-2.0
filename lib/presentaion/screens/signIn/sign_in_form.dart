@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:lablab2/bloc/auth/auth_cubit.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/presentaion/shared_widgets/labled_text_input.dart';
 import 'package:lablab2/presentaion/shared_widgets/password_field.dart';
@@ -17,8 +21,17 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  late final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -34,6 +47,7 @@ class _SignInFormState extends State<SignInForm> {
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -84,10 +98,24 @@ class _SignInFormState extends State<SignInForm> {
               const SizedBox(
                 height: 20,
               ),
-              MyTextButton(
-                onPressed: () {},
-                text: 'Sign In',
-                bgColor: context.res.colors.purple,
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return MyTextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthCubit>().signIn(
+                            _emailController.text, _passwordController.text);
+                      }
+                    },
+                    text: 'Sign In',
+                    bgColor: context.res.colors.purple,
+                  );
+                },
               ),
               const SizedBox(
                 height: 10,
