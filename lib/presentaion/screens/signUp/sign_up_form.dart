@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:lablab2/bloc/auth/auth_cubit.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/presentaion/shared_widgets/labled_text_input.dart';
 import 'package:lablab2/presentaion/shared_widgets/password_field.dart';
@@ -17,22 +21,35 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  late final TextEditingController _emailController;
+  late final TextEditingController _nameController;
+  late final TextEditingController _passwordController;
 
   bool _termsAndConditions = false;
   @override
+  void initState() {
+    _passwordController = TextEditingController();
+    _nameController = TextEditingController();
+    _emailController = TextEditingController();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
+    _nameController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
         child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -48,7 +65,7 @@ class _SignUpFormState extends State<SignUpForm> {
               LabledTextInput(
                 label: 'Name',
                 controller: _nameController,
-                validator: Validators.emailValidator,
+                validator: Validators.name,
               ),
               SizedBox(
                 height: context.res.dimens.labelFieldMargin,
@@ -82,44 +99,58 @@ class _SignUpFormState extends State<SignUpForm> {
                       context.res.colors.green,
                     ),
                   ),
-                  Text.rich(
-                    TextSpan(
-                      text: 'I agree to the ',
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        text: 'I agree to the ',
+                        style: context.res.styles.body.copyWith(
+                          color: context.res.colors.gray,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: 'Terms',
+                            style: context.res.styles.body.copyWith(
+                              color: context.res.colors.green,
+                            ),
+                          ),
+                          const TextSpan(
+                            text: ' and',
+                          ),
+                          TextSpan(
+                            text: ' Privacy Policy.',
+                            style: context.res.styles.body.copyWith(
+                              color: context.res.colors.green,
+                            ),
+                          ),
+                        ],
+                      ),
                       style: context.res.styles.body.copyWith(
                         color: context.res.colors.gray,
                       ),
-                      children: [
-                        TextSpan(
-                          text: 'Terms',
-                          style: context.res.styles.body.copyWith(
-                            color: context.res.colors.green,
-                          ),
-                        ),
-                        const TextSpan(
-                          text: ' and',
-                        ),
-                        TextSpan(
-                          text: ' Privacy Policy.',
-                          style: context.res.styles.body.copyWith(
-                            color: context.res.colors.green,
-                          ),
-                        ),
-                      ],
-                    ),
-                    style: context.res.styles.body.copyWith(
-                      color: context.res.colors.gray,
+                      maxLines: 2,
                     ),
                   ),
                 ],
               ),
-              MyTextButton(
-                onPressed: () {
-                  if (_termsAndConditions) {
-                    DepInj.locator.get<AppRouter>().push(context, Screens.main);
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }
+                  return MyTextButton(
+                    onPressed: () {
+                      if (_termsAndConditions &&
+                          _formKey.currentState!.validate()) {
+                        context.read<AuthCubit>().signUp(
+                            _emailController.text, _passwordController.text);
+                      }
+                    },
+                    text: 'Create an account',
+                    bgColor: context.res.colors.purple,
+                  );
                 },
-                text: 'Create an account',
-                bgColor: context.res.colors.purple,
               ),
               const SizedBox(
                 height: 10,

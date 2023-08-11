@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/repositories/authentication/firebase_auth_repo.dart';
 
