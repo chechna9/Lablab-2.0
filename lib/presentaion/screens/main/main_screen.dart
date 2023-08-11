@@ -159,7 +159,7 @@ class MainScreen extends StatelessWidget {
                       iconSize: 60,
                       splashRadius: 35,
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.add_circle_rounded,
                       ),
                     ),
