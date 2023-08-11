@@ -113,7 +113,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 ],
               ),
               MyTextButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (_termsAndConditions) {
+                    DepInj.locator.get<AppRouter>().push(context, Screens.main);
+                  }
+                },
                 text: 'Create an account',
                 bgColor: context.res.colors.purple,
               ),

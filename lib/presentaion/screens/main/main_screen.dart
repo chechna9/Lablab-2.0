@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lablab2/presentaion/screens/main/field_card.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/presentaion/shared_widgets/search_input.dart';
@@ -17,17 +16,20 @@ class MainScreen extends StatelessWidget {
       Positioned(
         top: -topCircleSize / 3,
         left: -topCircleSize / 3,
-        child: Circle.sameSize(
-          color: context.res.colors.lightPurple,
-          strockWidth: 3,
-          size: topCircleSize,
-          children: [
-            Circle.sameSize(
-              color: context.res.colors.lightPurple,
-              strockWidth: 2,
-              size: topCircleSize - 40,
-            ),
-          ],
+        child: Hero(
+          tag: "topCircle",
+          child: Circle.sameSize(
+            color: context.res.colors.lightPurple,
+            strockWidth: 3,
+            size: topCircleSize,
+            children: [
+              Circle.sameSize(
+                color: context.res.colors.lightPurple,
+                strockWidth: 2,
+                size: topCircleSize - 40,
+              ),
+            ],
+          ),
         ),
       ),
       // bottom circles
@@ -35,17 +37,20 @@ class MainScreen extends StatelessWidget {
       Positioned(
         bottom: -bottomCircleSize * 0.6,
         // left: -bottomCircleSize / 2,
-        child: Circle.sameSize(
-          color: context.res.colors.lightPurple,
-          strockWidth: 3,
-          size: bottomCircleSize,
-          children: [
-            Circle.sameSize(
-              color: context.res.colors.lightPurple,
-              strockWidth: 2,
-              size: bottomCircleSize - 60,
-            ),
-          ],
+        child: Hero(
+          tag: "bottomCircle",
+          child: Circle.sameSize(
+            color: context.res.colors.lightPurple,
+            strockWidth: 3,
+            size: bottomCircleSize,
+            children: [
+              Circle.sameSize(
+                color: context.res.colors.lightPurple,
+                strockWidth: 2,
+                size: bottomCircleSize - 60,
+              ),
+            ],
+          ),
         ),
       ),
     ];

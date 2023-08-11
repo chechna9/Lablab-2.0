@@ -14,9 +14,10 @@ class FieldCard extends StatelessWidget {
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.res.dimens.mainPadding / 2,
-          vertical: context.res.dimens.mainPadding / 2,
+        padding: EdgeInsets.only(
+          left: context.res.dimens.mainPadding / 2,
+          top: context.res.dimens.mainPadding / 2,
+          bottom: context.res.dimens.mainPadding / 2,
         ),
         child: Row(
           children: [
@@ -62,7 +63,7 @@ class FieldCard extends StatelessWidget {
                   ),
                   Text(
                     'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur. Neque sit vitae nunc mi varius scelerisque turpis..',
-                    maxLines: 3,
+                    maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                     style: context.res.styles.superSmall.copyWith(
                       color: context.res.colors.gray,
@@ -71,13 +72,14 @@ class FieldCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 5),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   onPressed: () {},
-                  splashRadius: 20,
+                  splashRadius: 15,
+                  iconSize: 20,
                   icon: Icon(
                     Icons.delete,
                     color: context.res.colors.red,
@@ -85,9 +87,12 @@ class FieldCard extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {},
-                  splashRadius: 20,
-                  icon: Icon(Icons.keyboard_arrow_right_outlined,
-                      color: context.res.colors.purple),
+                  splashRadius: 15,
+                  iconSize: 20,
+                  icon: Icon(
+                    Icons.keyboard_arrow_right_outlined,
+                    color: context.res.colors.purple,
+                  ),
                 ),
               ],
             ),

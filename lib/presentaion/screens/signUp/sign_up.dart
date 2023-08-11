@@ -40,20 +40,23 @@ class _SignUpState extends State<SignUp> {
           Positioned(
             bottom: -bottomCircleSize * 0.7,
             left: -bottomCircleSize * 0.5,
-            child: Circle.sameSize(
-              color: context.res.colors.lightPurple,
-              strockWidth: 3,
-              size: bottomCircleSize,
-              children: [
-                Circle.sameSize(
-                  color: context.res.colors.lightPurple,
-                  strockWidth: 2,
-                  size: bottomCircleSize - 40,
-                ),
-              ],
+            child: Hero(
+              tag: "bottomCircle",
+              child: Circle.sameSize(
+                color: context.res.colors.lightPurple,
+                strockWidth: 3,
+                size: bottomCircleSize,
+                children: [
+                  Circle.sameSize(
+                    color: context.res.colors.lightPurple,
+                    strockWidth: 2,
+                    size: bottomCircleSize - 40,
+                  ),
+                ],
+              ),
             ),
           ),
-          // thres bottom left images
+          // thres bottom right images
           Positioned(
             bottom: bottomOffset,
             right: rightOffset,
