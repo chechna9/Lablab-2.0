@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lablab2/presentaion/screens/main/main_screen.dart';
+import 'package:lablab2/presentaion/screens/main_content/main_content.dart';
 import 'package:lablab2/presentaion/screens/signIn&Up/sign_in_up.dart';
 import 'package:lablab2/presentaion/screens/signIn/sign_in.dart';
 import 'package:lablab2/presentaion/screens/signUp/sign_up.dart';
@@ -12,12 +13,14 @@ class AppRouter {
   static const String _signInRoute = '/signIn';
   static const String _signUpRoute = '/signUp';
   static const String _mainRoute = '/main';
+  static const String _mainContentRoute = '/mainContent';
 
   String get splashRoute => _splashRoute;
   String get losRoute => _losRoute;
   String get signInRoute => _signInRoute;
   String get signUpRoute => _signUpRoute;
   String get mainRoute => _mainRoute;
+  String get mainContentRoute => _mainContentRoute;
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -46,6 +49,10 @@ class AppRouter {
           builder: (_) => const SafeArea(child: MainScreen()),
         );
 
+      case _mainContentRoute:
+        return MaterialPageRoute(
+          builder: (_) => const SafeArea(child: MainContent()),
+        );
       default:
         return null;
     }
@@ -63,6 +70,8 @@ class AppRouter {
         return _signUpRoute;
       case Screens.main:
         return _mainRoute;
+      case Screens.mainContent:
+        return _mainContentRoute;
       default:
         return '/404';
     }
