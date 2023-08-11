@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:lablab2/repositories/authentication/auth_repository.dart';
 
 class FirebaseAuthRepo extends AuthRepository {
@@ -21,7 +22,6 @@ class FirebaseAuthRepo extends AuthRepository {
 
   @override
   Future<void> signOut() {
-    // TODO: implement signOut
     throw UnimplementedError();
   }
 
