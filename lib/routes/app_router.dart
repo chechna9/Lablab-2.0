@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:lablab2/bloc/user_auth/user_auth_cubit.dart';
 import 'package:lablab2/presentaion/screens/main/main_screen.dart';
 import 'package:lablab2/presentaion/screens/main_content/main_content.dart';
 import 'package:lablab2/presentaion/screens/signIn&Up/sign_in_up.dart';
@@ -26,7 +30,26 @@ class AppRouter {
     switch (settings.name) {
       case _splashRoute:
         return MaterialPageRoute(
-          builder: (_) => const SafeArea(child: SplashScreen()),
+          builder: (context) {
+            return BlocBuilder<UserAuthCubit, UserAuthState>(
+              builder: (context, state) {
+                if (state is UserAuthenticated) {
+                  return const SafeArea(child: MainScreen());
+                } else if (state is UserAuthUnauthenticated) {
+                  return const SafeArea(child: SignInUP());
+                } else if (state is UserAuthError) {
+                  return const SafeArea(
+                      child: Scaffold(
+                    body: Center(
+                      child: Text("Error"),
+                    ),
+                  ));
+                } else {
+                  return const SafeArea(child: SplashScreen());
+                }
+              },
+            );
+          },
         );
 
       case _losRoute:

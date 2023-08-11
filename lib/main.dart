@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:lablab2/bloc/auth/auth_cubit.dart';
 import 'package:lablab2/bloc/bloc_observer.dart';
+import 'package:lablab2/bloc/user_auth/user_auth_cubit.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/firebase_options.dart';
 import 'package:lablab2/presentaion/screens/signIn&Up/sign_in_up.dart';
@@ -30,12 +31,23 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthCubit(),
+        ),
+        BlocProvider(create: (context) => UserAuthCubit()),
+      ],
       child: MaterialApp(
         title: 'LabLab',
         debugShowCheckedModeBanner: false,
