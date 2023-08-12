@@ -5,9 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:lablab2/bloc/cubit/newform_cubit.dart';
+import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/presentaion/screens/content/content_desc.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/res/res_extension.dart';
+import 'package:lablab2/routes/app_router.dart';
+import 'package:lablab2/routes/screens_enum.dart';
 
 import '../../../data/enums/moral.dart';
 import '../../shared_widgets/custom_appbar.dart';
@@ -143,61 +146,70 @@ class _SelectMoralScreenState extends State<SelectMoralScreen> {
       // center right circle
     ];
 
-    return Material(
-      color: context.res.colors.purple,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          ...backgroundCircles,
-          Padding(
-            padding: EdgeInsets.only(
-              left: context.res.dimens.mainPadding,
-              right: context.res.dimens.mainPadding,
-              top: context.res.dimens.topMargin,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                CustomAppbar(
-                  title: "New Content",
-                  backButtonColor: context.res.colors.white,
-                  titleColor: context.res.colors.white,
-                ),
-                const Spacer(),
-                Text(
-                  "Select the moral values that this content will teach",
-                  style: context.res.styles.body,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Wrap(
-                  children: list,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                MyTextButton(
-                  onPressed: () {
-                    if (list.isNotEmpty) {
-                      context.read<NewformCubit>().submit();
-                    }
-                  },
-                  text: "Next",
-                  bgColor: context.res.colors.green,
-                ),
-                const Spacer(
-                  flex: 3,
-                ),
-              ],
-            ),
-          )
-        ],
+    return BlocListener<NewformCubit, NewformState>(
+      listener: (context, state) {
+        if (state is NewformLoaded) {
+          DepInj.locator
+              .get<AppRouter>()
+              .pushAndRemoveAll(context, Screens.main);
+        }
+      },
+      child: Material(
+        color: context.res.colors.purple,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ...backgroundCircles,
+            Padding(
+              padding: EdgeInsets.only(
+                left: context.res.dimens.mainPadding,
+                right: context.res.dimens.mainPadding,
+                top: context.res.dimens.topMargin,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomAppbar(
+                    title: "New Content",
+                    backButtonColor: context.res.colors.white,
+                    titleColor: context.res.colors.white,
+                  ),
+                  const Spacer(),
+                  Text(
+                    "Select the moral values that this content will teach",
+                    style: context.res.styles.body,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Wrap(
+                    children: list,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  MyTextButton(
+                    onPressed: () {
+                      if (list.isNotEmpty) {
+                        context.read<NewformCubit>().submit();
+                      }
+                    },
+                    text: "Next",
+                    bgColor: context.res.colors.green,
+                  ),
+                  const Spacer(
+                    flex: 3,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:http/http.dart' as http;
+import 'package:lablab2/data/models/content_model/content_model.dart';
+import 'package:lablab2/dep_inj.dart';
+import 'package:lablab2/repositories/content/firestore_content.dart';
 
 part 'newform_state.dart';
 
@@ -131,8 +134,10 @@ class NewformCubit extends Cubit<NewformState> {
       }
       print("object");
       print(response.body);
-
-      if (response.statusCode == 200) emit(NewformSuccess());
+      DepInj.locator
+          .get<FirestoreCotentRepository>()
+          .addContent(ContentModel.fromJson(response.body));
+      if (response.statusCode == 200) emit(NewformLoaded());
     } catch (e) {
       print(e);
       emit(NewformError(e.toString()));

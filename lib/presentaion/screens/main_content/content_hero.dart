@@ -58,9 +58,6 @@ class ContentHero extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              // Expanded(
-              //   child: Image.network(chapter.image),
-              // ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Row(
@@ -100,6 +97,7 @@ class ContentHero extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           chapter.chapterTitle,
+          maxLines: 2,
           style: context.res.styles.subheading.copyWith(
             color: context.res.colors.black,
           ),

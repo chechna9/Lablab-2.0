@@ -20,7 +20,7 @@ class FirestoreCotentRepository extends ContentRepository {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         data['id'] = doc.id;
 
-        listContent.add(ContentModel.fromMap(data));
+        listContent.add(ContentModel.fromMap2(data));
       }
       return listContent;
     } catch (e) {
@@ -31,7 +31,8 @@ class FirestoreCotentRepository extends ContentRepository {
   @override
   Future<void> deleteContent(ContentModel content) async {
     try {
-      await firestore.collection(contentCollection).doc(content.id!).delete();
+      // await firestore.collection(contentCollection).doc(content.id!).delete();
+      return;
     } catch (e) {
       throw Exception(e);
     }

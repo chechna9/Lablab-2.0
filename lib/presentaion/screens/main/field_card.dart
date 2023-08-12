@@ -65,10 +65,10 @@ class FieldCard extends StatelessWidget {
                     offset: const Offset(0, 5),
                   ),
                 ],
-                // image: DecorationImage(
-                //   image: NetworkImage(content.chapters[0].image),
-                //   fit: BoxFit.cover,
-                // ),
+                image: DecorationImage(
+                  image: NetworkImage(content.chapters[0].image),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 10),

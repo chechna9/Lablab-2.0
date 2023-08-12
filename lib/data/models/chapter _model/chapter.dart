@@ -15,17 +15,25 @@ class Chapter {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'chapterTitle': chapterTitle,
+      'title': chapterTitle,
       'content': content,
       'image': image,
       'audio': audio,
     };
   }
 
+  factory Chapter.fromMap2(Map<String, dynamic> map) {
+    return Chapter(
+      chapterTitle: map['title'] as String,
+      content: map['content'] as String,
+      image: map['image'] as String,
+      audio: map['audio'] as String?,
+    );
+  }
   factory Chapter.fromMap(Map<String, dynamic> map) {
     return Chapter(
-      chapterTitle: map['chapterTitle'] as String,
-      content: map['content'] as String,
+      chapterTitle: map['text']['title'] as String,
+      content: map['text']['content'] as String,
       image: map['image'] as String,
       audio: map['audio'] as String?,
     );

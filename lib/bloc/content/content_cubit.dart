@@ -17,6 +17,7 @@ class ContentCubit extends Cubit<ContentState> {
           await DepInj.locator.get<FirestoreCotentRepository>().getContent();
       emit(ContentLoaded(content));
     } catch (e) {
+      print(e);
       emit(ContentError(e.toString()));
     }
   }
