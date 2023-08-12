@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,14 +39,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late UserAuthCubit _userAuthCubit;
+  @override
+  void initState() {
+    _userAuthCubit = UserAuthCubit();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AuthCubit(),
+          create: (context) => _userAuthCubit,
         ),
-        BlocProvider(create: (context) => UserAuthCubit()),
+        BlocProvider(
+          create: (context) => AuthCubit(_userAuthCubit),
+        ),
       ],
       child: MaterialApp(
         title: 'LabLab',
@@ -55,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           brightness: Brightness.dark,
         ),
         onGenerateRoute: DepInj.locator<AppRouter>().onGenerateRoute,
-        initialRoute: DepInj.locator<AppRouter>().mainContentRoute,
+        initialRoute: DepInj.locator<AppRouter>().splashRoute,
       ),
     );
   }

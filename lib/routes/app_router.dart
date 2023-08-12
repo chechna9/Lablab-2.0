@@ -100,6 +100,10 @@ class AppRouter {
     }
   }
 
+  void pop(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
   void push(BuildContext context, Screens screen) {
     String routeName = getRouteNameFromEnum(screen);
     Navigator.of(context).pushNamed(routeName);

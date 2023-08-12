@@ -7,11 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 import 'package:lablab2/bloc/user_auth/user_auth_cubit.dart';
-import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/res/res_extension.dart';
-import 'package:lablab2/routes/app_router.dart';
-import 'package:lablab2/routes/screens_enum.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

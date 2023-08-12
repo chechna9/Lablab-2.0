@@ -43,128 +43,136 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                "Sign In",
-                style: context.res.styles.heading.copyWith(
-                  color: context.res.colors.black,
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                height: context.res.dimens.labelFieldMargin,
-              ),
-              LabledTextInput(
-                label: 'Email',
-                controller: _emailController,
-                validator: Validators.emailValidator,
-              ),
-              SizedBox(
-                height: context.res.dimens.labelFieldMargin,
-              ),
-              PasswordField(
-                label: 'Password',
-                controller: _passwordController,
-                validator: Validators.passwordValidator,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    'Forgot your password? ',
-                    style: context.res.styles.body.copyWith(
-                      color: context.res.colors.gray,
-                    ),
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess) {
+          DepInj.locator.get<AppRouter>().pop(context);
+          
+        }
+      },
+      child: Center(
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "Sign In",
+                  style: context.res.styles.heading.copyWith(
+                    color: context.res.colors.black,
                   ),
-                  MyTextButton(
-                    onPressed: () {},
-                    text: 'Click here',
-                    textColor: context.res.colors.green,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, state) {
-                  if (state is AuthLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                SizedBox(
+                  height: context.res.dimens.labelFieldMargin,
+                ),
+                LabledTextInput(
+                  label: 'Email',
+                  controller: _emailController,
+                  validator: Validators.emailValidator,
+                ),
+                SizedBox(
+                  height: context.res.dimens.labelFieldMargin,
+                ),
+                PasswordField(
+                  label: 'Password',
+                  controller: _passwordController,
+                  validator: Validators.passwordValidator,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Forgot your password? ',
+                      style: context.res.styles.body.copyWith(
+                        color: context.res.colors.gray,
+                      ),
+                    ),
+                    MyTextButton(
+                      onPressed: () {},
+                      text: 'Click here',
+                      textColor: context.res.colors.green,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    if (state is AuthLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return MyTextButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<AuthCubit>().signIn(
+                              _emailController.text, _passwordController.text);
+                        }
+                      },
+                      text: 'Sign In',
+                      bgColor: context.res.colors.purple,
                     );
-                  }
-                  return MyTextButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<AuthCubit>().signIn(
-                            _emailController.text, _passwordController.text);
-                      }
-                    },
-                    text: 'Sign In',
-                    bgColor: context.res.colors.purple,
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              MyTextButton(
-                onPressed: () {},
-                bgColor: context.res.colors.green,
-                child: Row(
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MyTextButton(
+                  onPressed: () {},
+                  bgColor: context.res.colors.green,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sign in with Google",
+                        style: context.res.styles.buttons.copyWith(
+                          color: context.res.colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SvgPicture.asset(
+                        context.res.drawable.googleWhiteLogo,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Sign in with Google",
-                      style: context.res.styles.buttons.copyWith(
-                        color: context.res.colors.white,
+                      'Don\'t have an account? ',
+                      style: context.res.styles.body.copyWith(
+                        color: context.res.colors.gray,
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    SvgPicture.asset(
-                      context.res.drawable.googleWhiteLogo,
-                    ),
+                    MyTextButton(
+                      onPressed: () {
+                        DepInj.locator
+                            .get<AppRouter>()
+                            .pushReplacement(context, Screens.signUp);
+                      },
+                      text: 'Sign Up',
+                      textColor: context.res.colors.green,
+                    )
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Don\'t have an account? ',
-                    style: context.res.styles.body.copyWith(
-                      color: context.res.colors.gray,
-                    ),
-                  ),
-                  MyTextButton(
-                    onPressed: () {
-                      DepInj.locator
-                          .get<AppRouter>()
-                          .pushReplacement(context, Screens.signUp);
-                    },
-                    text: 'Sign Up',
-                    textColor: context.res.colors.green,
-                  )
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
