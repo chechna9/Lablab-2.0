@@ -4,4 +4,5 @@ abstract class ContentRepository {
   // Future<List<ContentModel>> getContent();
   Future<void> getContent();
   Future<void> addContent(ContentModel content);
+  Future<void> deleteContent(ContentModel content);
 }

@@ -18,11 +18,22 @@ class FirestoreCotentRepository extends ContentRepository {
           await firestore.collection(contentCollection).get();
       for (var doc in querySnapshot.docs) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        data['id'] = doc.id;
+
         listContent.add(ContentModel.fromMap(data));
       }
       return listContent;
     } catch (e) {
       throw Exception('Error getting content: $e');
+    }
+  }
+
+  @override
+  Future<void> deleteContent(ContentModel content) async {
+    try {
+      await firestore.collection(contentCollection).doc(content.id!).delete();
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }

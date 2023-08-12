@@ -151,6 +151,11 @@ class _MainScreenState extends State<MainScreen> {
                                       .get<AppRouter>()
                                       .push(context, Screens.mainContent);
                                 },
+                                onDelete: () {
+                                  context
+                                      .read<ContentCubit>()
+                                      .deleteContent(content);
+                                },
                               );
                             },
                           ),

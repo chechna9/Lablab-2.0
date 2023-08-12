@@ -29,4 +29,14 @@ class ContentCubit extends Cubit<ContentState> {
   void unSelectContent(List<ContentModel> listContents) async {
     emit(ContentLoaded(listContents));
   }
+
+  void deleteContent(ContentModel content) async {
+    emit(ContentLoading());
+    try {
+      DepInj.locator.get<FirestoreCotentRepository>().deleteContent(content);
+      getContent();
+    } catch (e) {
+      emit(ContentError(e.toString()));
+    }
+  }
 }

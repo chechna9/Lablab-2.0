@@ -13,7 +13,7 @@ class ContentHero extends StatelessWidget {
         Container(
           // width: context.res.dimens.screenWidth / 4,
           height: context.res.dimens.screenWidth / 2,
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 10,
           ),
           padding: const EdgeInsets.symmetric(

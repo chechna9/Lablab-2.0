@@ -6,7 +6,9 @@ import 'package:lablab2/res/res_extension.dart';
 class FieldCard extends StatelessWidget {
   final ContentModel content;
   final void Function()? onSelect;
-  const FieldCard({super.key, required this.content, this.onSelect});
+  final void Function()? onDelete;
+  const FieldCard(
+      {super.key, required this.content, this.onSelect, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +65,10 @@ class FieldCard extends StatelessWidget {
                     offset: const Offset(0, 5),
                   ),
                 ],
-                image: DecorationImage(
-                  image: NetworkImage(content.chapters[0].image),
-                  fit: BoxFit.cover,
-                ),
+                // image: DecorationImage(
+                //   image: NetworkImage(content.chapters[0].image),
+                //   fit: BoxFit.cover,
+                // ),
               ),
             ),
             const SizedBox(width: 10),
@@ -97,7 +99,7 @@ class FieldCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: onDelete,
                   splashRadius: 15,
                   iconSize: 20,
                   icon: Icon(
