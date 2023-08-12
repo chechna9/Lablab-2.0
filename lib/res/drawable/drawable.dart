@@ -8,4 +8,5 @@ abstract class Drawable {
   String get googleWhiteLogo;
   String get avatar;
   String get goldenStar;
+  String get logo;
 }

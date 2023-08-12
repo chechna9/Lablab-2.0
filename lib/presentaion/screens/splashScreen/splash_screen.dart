@@ -292,8 +292,9 @@ class _SplashScreenState extends State<SplashScreen>
               children: [
                 ScaleTransition(
                   scale: __logoScaleAnimation,
-                  child: const FlutterLogo(
-                    size: 80,
+                  child: SvgPicture.asset(
+                    context.res.drawable.logo,
+                    width: 80,
                   ),
                 ),
                 Row(
@@ -304,7 +305,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: SlideTransition(
                         position: __curiousSlideAnimation,
                         child: Text(
-                          'Curious',
+                          'Kurio',
                           style: context.res.styles.heading,
                         ),
                       ),
@@ -314,7 +315,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: SlideTransition(
                         position: __budSlideAnimation,
                         child: Text(
-                          'Bud',
+                          'App',
                           style: context.res.styles.heading.copyWith(
                             color: context.res.colors.green,
                           ),

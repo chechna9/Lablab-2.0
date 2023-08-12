@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:lablab2/data/models/chapter%20_model/chapter.dart';
+import 'package:lablab2/data/models/content_model/content_model.dart';
 import 'package:lablab2/res/res_extension.dart';
 
 class FieldCard extends StatelessWidget {
-  const FieldCard({super.key});
+  final ContentModel content;
+  final void Function()? onSelect;
+  final void Function()? onDelete;
+  const FieldCard(
+      {super.key, required this.content, this.onSelect, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
+    String subtitle = "";
+    for (Chapter chapiter in content.chapters) {
+      subtitle += "${chapiter.chapterTitle}, ";
+    }
+
     return Card(
       color: context.res.colors.white,
       margin: EdgeInsets.symmetric(
@@ -54,6 +65,10 @@ class FieldCard extends StatelessWidget {
                     offset: const Offset(0, 5),
                   ),
                 ],
+                image: DecorationImage(
+                  image: NetworkImage(content.chapters[0].image),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 10),
@@ -63,13 +78,13 @@ class FieldCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'What is AI?',
+                    content.title,
                     style: context.res.styles.subheading.copyWith(
                       color: context.res.colors.black,
                     ),
                   ),
                   Text(
-                    'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetur. Neque sit vitae nunc mi varius scelerisque turpis..',
+                    subtitle,
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                     style: context.res.styles.superSmall.copyWith(
@@ -84,7 +99,7 @@ class FieldCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: onDelete,
                   splashRadius: 15,
                   iconSize: 20,
                   icon: Icon(
@@ -93,7 +108,7 @@ class FieldCard extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: onSelect,
                   splashRadius: 15,
                   iconSize: 20,
                   icon: Icon(

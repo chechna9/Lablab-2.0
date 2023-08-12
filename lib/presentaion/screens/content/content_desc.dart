@@ -1,18 +1,42 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'package:lablab2/presentaion/screens/content/new_content.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/res/res_extension.dart';
 
+import '../../../bloc/cubit/newform_cubit.dart';
+import '../../../data/enums/moral.dart';
 import '../../shared_widgets/custom_appbar.dart';
 import '../../shared_widgets/labled_text_input.dart';
 import '../../shared_widgets/text_button.dart';
+import '../../shared_widgets/text_button.dart';
 
-class ContentDetails extends StatelessWidget {
+class ContentDetails extends StatefulWidget {
   const ContentDetails({super.key});
+
+  @override
+  State<ContentDetails> createState() => _ContentDetailsState();
+}
+
+class _ContentDetailsState extends State<ContentDetails> {
+  late TextEditingController _titleController;
+  @override
+  void initState() {
+    _titleController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
+  }
+
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -105,110 +129,169 @@ class ContentDetails extends StatelessWidget {
               right: context.res.dimens.mainPadding,
               top: context.res.dimens.topMargin,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                CustomAppbar(
-                  title: "New Content",
-                  backButtonColor: context.res.colors.white,
-                  titleColor: context.res.colors.white,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                LabledTextInput(
-                  label: "Topic",
-                  controller: TextEditingController(),
-                  validator: (p0) {},
-                ),
-                const Row(
-                  children: [
-                    Expanded(
-                      child: TextFieldDropMenu(
-                        values: ["English", "Arabic", "French"],
-                        hintText: "Language",
-                        initialValue: "English",
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomAppbar(
+                    title: "New Content",
+                    backButtonColor: context.res.colors.white,
+                    titleColor: context.res.colors.white,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  LabledTextInput(
+                    label: "Topic",
+                    controller: _titleController,
+                    validator: (p0) {
+                      if (p0!.isEmpty) {
+                        return "Please enter a topic";
+                      }
+                    },
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldDropMenu(
+                          values: ["English", "Arabic", "French"],
+                          hintText: "Language",
+                          initialValue: context.watch<NewformCubit>().language,
+                          key: ValueKey("language"),
+                          onChanged: (value) {
+                            context.read<NewformCubit>().setLanguage(value);
+                          },
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: TextFieldDropMenu(
-                        values: ["Short", "Medium", "Long"],
-                        hintText: "Length",
-                        initialValue: "Short",
+                      SizedBox(
+                        width: 20,
                       ),
-                    ),
-                  ],
-                ),
-                const Row(
-                  children: [
-                    Expanded(
-                      child: TextFieldDropMenu(
-                        values: ["Superficial", "Mid-detailed", "Detailed"],
-                        hintText: "Depth",
-                        initialValue: "Superficial",
+                      Expanded(
+                        child: TextFieldDropMenu(
+                          values: ["Short", "Medium", "Long"],
+                          hintText: "Length",
+                          initialValue: context.watch<NewformCubit>().length,
+                          key: ValueKey("length"),
+                          onChanged: (value) {
+                            context.read<NewformCubit>().setlength(value);
+                          },
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: TextFieldDropMenu(
-                        values: [
-                          "Astronomy",
-                          "Biology",
-                          "Chemistry",
-                          "Computer Science",
-                          "Economics",
-                          "History",
-                          "Mathematics"
-                        ],
-                        hintText: "Field",
-                        initialValue: "Astronomy",
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldDropMenu(
+                          values: ["Superficial", "Mid-detailed", "Detailed"],
+                          hintText: "Depth",
+                          initialValue: context.watch<NewformCubit>().depth,
+                          key: ValueKey("depth"),
+                          onChanged: (value) {
+                            context.read<NewformCubit>().setdepth(value);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const Row(
-                  children: [
-                    Expanded(
-                      child: TextFieldDropMenu(
-                        values: ["Basic", "Medium", "Advanced"],
-                        hintText: "Level",
-                        initialValue: "Basic",
+                      SizedBox(
+                        width: 20,
                       ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: TextFieldDropMenu(
-                        values: [
-                          "Short",
-                          "Medium",
-                          "Long",
-                        ],
-                        hintText: "Chapter",
-                        initialValue: "Short",
+                      Expanded(
+                        child: TextFieldDropMenu(
+                          values: context.watch<NewformCubit>().ktype == "Story"
+                              ? [
+                                  "Drama",
+                                  "Comedy",
+                                  "Action",
+                                  "Mystery",
+                                  "Fantasy",
+                                  "Sci-Fi",
+                                  "Historical"
+                                ]
+                              : [
+                                  "Astronomy",
+                                  "Biology",
+                                  "Chemistry",
+                                  "Computer Science",
+                                  "Economics",
+                                  "History",
+                                  "Mathematics"
+                                ],
+                          hintText:
+                              context.watch<NewformCubit>().ktype == "Story"
+                                  ? "Genres"
+                                  : "Field",
+                          initialValue:
+                              context.watch<NewformCubit>().ktype == "Story"
+                                  ? context.watch<NewformCubit>().genres
+                                  : context.watch<NewformCubit>().field,
+                          key: ValueKey("field"),
+                          onChanged: (value) {
+                            context.read<NewformCubit>().ktype == "Story"
+                                ? context.read<NewformCubit>().setgenres(value)
+                                : context.read<NewformCubit>().setfield(value);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                MyTextButton(
-                  onPressed: () {},
-                  text: "Next",
-                  bgColor: context.res.colors.green,
-                ),
-              ],
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldDropMenu(
+                            values: ["Basic", "Medium", "Advanced"],
+                            hintText: "Level",
+                            initialValue: context.watch<NewformCubit>().level,
+                            onChanged: (value) {
+                              context.read<NewformCubit>().setlevel(value);
+                            },
+                            key: ValueKey("level")),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: TextFieldDropMenu(
+                          values: [
+                            "Short",
+                            "Medium",
+                            "Long",
+                          ],
+                          hintText: "Chapter",
+                          initialValue: context.watch<NewformCubit>().chapter,
+                          key: ValueKey("chapter"),
+                          onChanged: (value) {
+                            context.read<NewformCubit>().setChapter(value);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  MyTextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context
+                            .read<NewformCubit>()
+                            .setTopic(_titleController.text);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const SelectMoralScreen()));
+                      }
+                    },
+                    text: "Next",
+                    bgColor: context.res.colors.green,
+                  ),
+                ],
+              ),
             ),
           )
         ],
@@ -219,16 +302,19 @@ class ContentDetails extends StatelessWidget {
 
 class TextFieldDropMenu extends StatefulWidget {
   const TextFieldDropMenu(
-      {super.key, this.hintText, required this.values, this.initialValue});
+      {super.key,
+      this.hintText,
+      required this.values,
+      this.initialValue,
+      required this.onChanged});
   final String? hintText;
   final List<String> values;
   final String? initialValue;
+  final Function(String) onChanged;
 
   @override
   State<TextFieldDropMenu> createState() => _TextFieldDropMenuState();
 }
-
-String initial = '';
 
 class _TextFieldDropMenuState extends State<TextFieldDropMenu> {
   @override
@@ -260,9 +346,9 @@ class _TextFieldDropMenuState extends State<TextFieldDropMenu> {
                         value: value,
                         child: Text(value),
                         onTap: () {
-                          setState(() {
-                            initial = value;
-                          });
+                          widget.onChanged(value);
+
+                          setState(() {});
                         },
                       );
                     }).toList();
@@ -301,7 +387,7 @@ class _TextFieldDropMenuState extends State<TextFieldDropMenu> {
                 ),
               ),
               child: Text(
-                initial == '' ? widget.initialValue! : initial,
+                widget.initialValue!,
                 style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.normal,

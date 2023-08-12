@@ -5,37 +5,37 @@ class Chapter {
   String chapterTitle;
   String content;
   String image;
+  String? audio;
   Chapter({
     required this.chapterTitle,
     required this.content,
     required this.image,
+    this.audio,
   });
-
-  Chapter copyWith({
-    String? chapterTitle,
-    String? content,
-    String? image,
-  }) {
-    return Chapter(
-      chapterTitle: chapterTitle ?? this.chapterTitle,
-      content: content ?? this.content,
-      image: image ?? this.image,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'chapterTitle': chapterTitle,
+      'title': chapterTitle,
       'content': content,
       'image': image,
+      'audio': audio,
     };
   }
 
+  factory Chapter.fromMap2(Map<String, dynamic> map) {
+    return Chapter(
+      chapterTitle: map['title'] as String,
+      content: map['content'] as String,
+      image: map['image'] as String,
+      audio: map['audio'] as String?,
+    );
+  }
   factory Chapter.fromMap(Map<String, dynamic> map) {
     return Chapter(
-      chapterTitle: map['text']['chapterTitle'] as String,
+      chapterTitle: map['text']['title'] as String,
       content: map['text']['content'] as String,
       image: map['image'] as String,
+      audio: map['audio'] as String?,
     );
   }
 
@@ -43,20 +43,4 @@ class Chapter {
 
   factory Chapter.fromJson(String source) =>
       Chapter.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  bool operator ==(covariant Chapter other) {
-    if (identical(this, other)) return true;
-
-    return other.chapterTitle == chapterTitle &&
-        other.content == content &&
-        other.image == image;
-  }
-
-  @override
-  int get hashCode => chapterTitle.hashCode ^ content.hashCode ^ image.hashCode;
-
-  @override
-  String toString() =>
-      'Chapter(chapterTitle: $chapterTitle, content: $content, image: $image)';
 }

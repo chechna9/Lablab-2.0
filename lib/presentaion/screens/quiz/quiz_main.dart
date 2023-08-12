@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lablab2/bloc/content/content_cubit.dart';
-
-import 'package:lablab2/data/models/chapter%20_model/chapter.dart';
 import 'package:lablab2/data/models/content_model/content_model.dart';
 import 'package:lablab2/presentaion/screens/main_content/swiper_content.dart';
+import 'package:lablab2/presentaion/screens/quiz/quiz_content.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/presentaion/shared_widgets/custom_appbar.dart';
 import 'package:lablab2/res/res_extension.dart';
 
-class MainContent extends StatelessWidget {
-  const MainContent({super.key});
+class QuizMain extends StatelessWidget {
+  final String chapterContent;
+  const QuizMain({super.key, required this.chapterContent});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MainContent extends StatelessWidget {
     final List<Widget> backgroundCircles = [
       // top circles
       Positioned(
-        top: -topCircleSize / 2,
+        top: -topCircleSize * 0.8,
         left: -topCircleSize / 3,
         child: Hero(
           tag: "topCircle",
@@ -72,61 +72,42 @@ class MainContent extends StatelessWidget {
         ),
       ),
     ];
-
-    return BlocBuilder<ContentCubit, ContentState>(
-      builder: (context, state) {
-        if (state is ContentLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is ContentSelected) {
-          final ContentModel content = state.content;
-          return Material(
-            color: context.res.colors.white,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                ...backgroundCircles,
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: context.res.dimens.mainPadding,
-                    right: context.res.dimens.mainPadding,
-                    top: context.res.dimens.topMargin,
+    return SafeArea(
+      child: Material(
+        color: context.res.colors.white,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ...backgroundCircles,
+            Padding(
+              padding: EdgeInsets.only(
+                left: context.res.dimens.mainPadding,
+                right: context.res.dimens.mainPadding,
+                top: context.res.dimens.topMargin,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomAppbar(
+                      title: 'Quiz',
+                      backButtonColor: context.res.colors.black,
+                      titleColor: context.res.colors.black,
+                      onBackButtonPressed: () {}),
+                  const SizedBox(
+                    height: 20,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomAppbar(
-                        title: content.title,
-                        backButtonColor: context.res.colors.black,
-                        titleColor: context.res.colors.black,
-                        onBackButtonPressed: () {
-                          context.read<ContentCubit>().unSelectContent(
-                                state.listContent,
-                              );
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        child: SwiperContent(
-                          chapters: content.chapters,
-                        ),
-                      ), // first chapter
-                    ],
+                  //  quiz content
+                  Expanded(
+                    child: QuizContent(
+                      chapterContent: chapterContent,
+                    ),
                   ),
-                )
-              ],
-            ),
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
