@@ -4,6 +4,7 @@ import 'package:lablab2/bloc/content/content_cubit.dart';
 import 'package:lablab2/data/models/content_model/content_model.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/presentaion/screens/main/field_card.dart';
+import 'package:lablab2/presentaion/screens/quiz/quiz_main.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/presentaion/shared_widgets/custom_appbar.dart';
 import 'package:lablab2/presentaion/shared_widgets/search_input.dart';
@@ -179,7 +180,14 @@ class _MainScreenState extends State<MainScreen> {
                     child: IconButton(
                       iconSize: 60,
                       splashRadius: 35,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QuizMain(),
+                          ),
+                        );
+                      },
                       icon: const Icon(
                         Icons.add_circle_rounded,
                       ),
