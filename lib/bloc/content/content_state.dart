@@ -19,10 +19,11 @@ final class ContentLoaded extends ContentState {
 }
 
 final class ContentSelected extends ContentState {
+  final List<ContentModel> listContent;
   final ContentModel content;
-  const ContentSelected(this.content);
+  const ContentSelected(this.content, this.listContent);
   @override
-  List<Object> get props => [content];
+  List<Object> get props => [content, listContent];
 }
 
 final class ContentError extends ContentState {

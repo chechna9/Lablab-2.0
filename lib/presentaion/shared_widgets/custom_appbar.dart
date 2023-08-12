@@ -7,12 +7,14 @@ class CustomAppbar extends StatelessWidget {
   final bool showBackButton;
   final Color titleColor;
   final Color backButtonColor;
+  final Function()? onBackButtonPressed;
   const CustomAppbar({
     super.key,
     required this.title,
     this.showBackButton = true,
     this.titleColor = Colors.black,
     this.backButtonColor = Colors.black,
+    this.onBackButtonPressed,
   });
 
   @override
@@ -27,6 +29,9 @@ class CustomAppbar extends StatelessWidget {
             showBackButton
                 ? IconButton(
                     onPressed: () {
+                      if (onBackButtonPressed != null) {
+                        onBackButtonPressed!();
+                      }
                       Navigator.pop(context);
                     },
                     splashRadius: 20,

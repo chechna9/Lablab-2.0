@@ -99,6 +99,11 @@ class MainContent extends StatelessWidget {
                         title: content.title,
                         backButtonColor: context.res.colors.black,
                         titleColor: context.res.colors.black,
+                        onBackButtonPressed: () {
+                          context.read<ContentCubit>().unSelectContent(
+                                state.listContent,
+                              );
+                        },
                       ),
                       const SizedBox(
                         height: 20,

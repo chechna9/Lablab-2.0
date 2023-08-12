@@ -133,8 +133,6 @@ class _MainScreenState extends State<MainScreen> {
                       }
                       if (state is ContentLoaded) {
                         return Container(
-                          // clipBehavior: Clip.hardEdge,
-
                           decoration: BoxDecoration(
                             color: context.res.colors.lightPurple,
                             borderRadius: BorderRadius.circular(30),
@@ -147,9 +145,8 @@ class _MainScreenState extends State<MainScreen> {
                               return FieldCard(
                                 content: content,
                                 onSelect: () {
-                                  context
-                                      .read<ContentCubit>()
-                                      .selectContent(content);
+                                  context.read<ContentCubit>().selectContent(
+                                      state.listContent, content);
                                   DepInj.locator
                                       .get<AppRouter>()
                                       .push(context, Screens.mainContent);

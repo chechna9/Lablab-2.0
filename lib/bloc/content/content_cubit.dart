@@ -21,7 +21,12 @@ class ContentCubit extends Cubit<ContentState> {
     }
   }
 
-  void selectContent(ContentModel content) async {
-    emit(ContentSelected(content));
+  void selectContent(
+      List<ContentModel> listContents, ContentModel content) async {
+    emit(ContentSelected(content, listContents));
+  }
+
+  void unSelectContent(List<ContentModel> listContents) async {
+    emit(ContentLoaded(listContents));
   }
 }
