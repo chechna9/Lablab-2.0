@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:lablab2/bloc/auth/auth_cubit.dart';
 import 'package:lablab2/bloc/bloc_observer.dart';
+import 'package:lablab2/bloc/user_auth/user_auth_cubit.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/firebase_options.dart';
 import 'package:lablab2/presentaion/screens/signIn&Up/sign_in_up.dart';
@@ -30,12 +31,32 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late UserAuthCubit _userAuthCubit;
+  @override
+  void initState() {
+    _userAuthCubit = UserAuthCubit();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => _userAuthCubit,
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(_userAuthCubit),
+        ),
+      ],
       child: MaterialApp(
         title: 'LabLab',
         debugShowCheckedModeBanner: false,
@@ -43,7 +64,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
         onGenerateRoute: DepInj.locator<AppRouter>().onGenerateRoute,
-        initialRoute: DepInj.locator<AppRouter>().mainContentRoute,
+        initialRoute: DepInj.locator<AppRouter>().splashRoute,
       ),
     );
   }

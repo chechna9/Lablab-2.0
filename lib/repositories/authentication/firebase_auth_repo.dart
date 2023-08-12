@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:lablab2/data/models/user_model/user_model.dart';
 import 'package:lablab2/repositories/authentication/auth_repository.dart';
 
 class FirebaseAuthRepo extends AuthRepository {
@@ -38,6 +39,19 @@ class FirebaseAuthRepo extends AuthRepository {
       }
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<UserModel?> getUser() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        return UserModel(email: user.email!);
+      }
+      return null;
+    } catch (e) {
+      throw Exception('No user found');
     }
   }
 }

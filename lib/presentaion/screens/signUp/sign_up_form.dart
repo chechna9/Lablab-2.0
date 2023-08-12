@@ -46,160 +46,167 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                "Create an account",
-                style: context.res.styles.heading.copyWith(
-                  color: context.res.colors.black,
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              LabledTextInput(
-                label: 'Name',
-                controller: _nameController,
-                validator: Validators.name,
-              ),
-              SizedBox(
-                height: context.res.dimens.labelFieldMargin,
-              ),
-              LabledTextInput(
-                label: 'Email',
-                controller: _emailController,
-                validator: Validators.emailValidator,
-              ),
-              SizedBox(
-                height: context.res.dimens.labelFieldMargin,
-              ),
-              PasswordField(
-                label: 'Password',
-                controller: _passwordController,
-                validator: Validators.passwordValidator,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Checkbox(
-                    value: _termsAndConditions,
-                    onChanged: (changed) {
-                      setState(() {
-                        _termsAndConditions = changed!;
-                      });
-                    },
-                    fillColor: MaterialStateProperty.all(
-                      context.res.colors.green,
-                    ),
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess) {
+          DepInj.locator.get<AppRouter>().pop(context);
+        }
+      },
+      child: Center(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "Create an account",
+                  style: context.res.styles.heading.copyWith(
+                    color: context.res.colors.black,
                   ),
-                  Expanded(
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'I agree to the ',
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                LabledTextInput(
+                  label: 'Name',
+                  controller: _nameController,
+                  validator: Validators.name,
+                ),
+                SizedBox(
+                  height: context.res.dimens.labelFieldMargin,
+                ),
+                LabledTextInput(
+                  label: 'Email',
+                  controller: _emailController,
+                  validator: Validators.emailValidator,
+                ),
+                SizedBox(
+                  height: context.res.dimens.labelFieldMargin,
+                ),
+                PasswordField(
+                  label: 'Password',
+                  controller: _passwordController,
+                  validator: Validators.passwordValidator,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _termsAndConditions,
+                      onChanged: (changed) {
+                        setState(() {
+                          _termsAndConditions = changed!;
+                        });
+                      },
+                      fillColor: MaterialStateProperty.all(
+                        context.res.colors.green,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text.rich(
+                        TextSpan(
+                          text: 'I agree to the ',
+                          style: context.res.styles.body.copyWith(
+                            color: context.res.colors.gray,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: 'Terms',
+                              style: context.res.styles.body.copyWith(
+                                color: context.res.colors.green,
+                              ),
+                            ),
+                            const TextSpan(
+                              text: ' and',
+                            ),
+                            TextSpan(
+                              text: ' Privacy Policy.',
+                              style: context.res.styles.body.copyWith(
+                                color: context.res.colors.green,
+                              ),
+                            ),
+                          ],
+                        ),
                         style: context.res.styles.body.copyWith(
                           color: context.res.colors.gray,
                         ),
-                        children: [
-                          TextSpan(
-                            text: 'Terms',
-                            style: context.res.styles.body.copyWith(
-                              color: context.res.colors.green,
-                            ),
-                          ),
-                          const TextSpan(
-                            text: ' and',
-                          ),
-                          TextSpan(
-                            text: ' Privacy Policy.',
-                            style: context.res.styles.body.copyWith(
-                              color: context.res.colors.green,
-                            ),
-                          ),
-                        ],
+                        maxLines: 2,
                       ),
-                      style: context.res.styles.body.copyWith(
-                        color: context.res.colors.gray,
-                      ),
-                      maxLines: 2,
-                    ),
-                  ),
-                ],
-              ),
-              BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, state) {
-                  if (state is AuthLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return MyTextButton(
-                    onPressed: () {
-                      if (_termsAndConditions &&
-                          _formKey.currentState!.validate()) {
-                        context.read<AuthCubit>().signUp(
-                            _emailController.text, _passwordController.text);
-                      }
-                    },
-                    text: 'Create an account',
-                    bgColor: context.res.colors.purple,
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              MyTextButton(
-                onPressed: () {},
-                bgColor: context.res.colors.green,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Sign up with Google",
-                      style: context.res.styles.buttons.copyWith(
-                        color: context.res.colors.white,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    SvgPicture.asset(
-                      context.res.drawable.googleWhiteLogo,
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Already have an account? ',
-                    style: context.res.styles.body.copyWith(
-                      color: context.res.colors.gray,
-                    ),
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    if (state is AuthLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return MyTextButton(
+                      onPressed: () {
+                        if (_termsAndConditions &&
+                            _formKey.currentState!.validate()) {
+                          context.read<AuthCubit>().signUp(
+                              _emailController.text, _passwordController.text);
+                        }
+                      },
+                      text: 'Create an account',
+                      bgColor: context.res.colors.purple,
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MyTextButton(
+                  onPressed: () {},
+                  bgColor: context.res.colors.green,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sign up with Google",
+                        style: context.res.styles.buttons.copyWith(
+                          color: context.res.colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SvgPicture.asset(
+                        context.res.drawable.googleWhiteLogo,
+                      ),
+                    ],
                   ),
-                  MyTextButton(
-                    onPressed: () {
-                      DepInj.locator
-                          .get<AppRouter>()
-                          .pushReplacement(context, Screens.signIn);
-                    },
-                    text: 'Sign In',
-                    textColor: context.res.colors.green,
-                  )
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have an account? ',
+                      style: context.res.styles.body.copyWith(
+                        color: context.res.colors.gray,
+                      ),
+                    ),
+                    MyTextButton(
+                      onPressed: () {
+                        DepInj.locator
+                            .get<AppRouter>()
+                            .pushReplacement(context, Screens.signIn);
+                      },
+                      text: 'Sign In',
+                      textColor: context.res.colors.green,
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

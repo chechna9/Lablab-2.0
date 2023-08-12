@@ -1,13 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lablab2/dep_inj.dart';
+import 'package:vector_math/vector_math_64.dart';
+
+import 'package:lablab2/bloc/user_auth/user_auth_cubit.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/res/res_extension.dart';
-import 'package:lablab2/routes/app_router.dart';
-import 'package:lablab2/routes/screens_enum.dart';
-import 'package:vector_math/vector_math_64.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -183,8 +184,9 @@ class _SplashScreenState extends State<SplashScreen>
         ),
       ),
     );
-    _animationController.forward().then((value) =>
-        DepInj.locator<AppRouter>().pushReplacement(context, Screens.los));
+    _animationController
+        .forward()
+        .then((value) => context.read<UserAuthCubit>().checkUserAuth());
   }
 
   @override

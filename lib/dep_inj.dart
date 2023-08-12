@@ -9,5 +9,7 @@ class DepInj {
   static void setup() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => FirebaseAuthRepo());
+    // locator.registerLazySingleton(() => AuthCubit(),);
+    // locator.registerLazySingleton(() => UserAuthCubit());
   }
 }
