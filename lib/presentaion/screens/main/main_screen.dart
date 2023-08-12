@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lablab2/bloc/content/content_cubit.dart';
 import 'package:lablab2/data/models/content_model/content_model.dart';
 import 'package:lablab2/dep_inj.dart';
+import 'package:lablab2/presentaion/screens/content/select_content_type.dart';
 import 'package:lablab2/presentaion/screens/main/field_card.dart';
 import 'package:lablab2/presentaion/screens/quiz/quiz_main.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
@@ -180,7 +181,13 @@ class _MainScreenState extends State<MainScreen> {
                     child: IconButton(
                       iconSize: 60,
                       splashRadius: 35,
-                      onPressed: () async {},
+                      onPressed: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SelectContentType(),
+                            ));
+                      },
                       icon: const Icon(
                         Icons.add_circle_rounded,
                       ),

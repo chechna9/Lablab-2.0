@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lablab2/bloc/content/content_cubit.dart';
+
+import 'package:lablab2/data/models/chapter%20_model/chapter.dart';
 import 'package:lablab2/data/models/content_model/content_model.dart';
 import 'package:lablab2/presentaion/screens/main_content/swiper_content.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
