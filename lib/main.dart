@@ -61,20 +61,17 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
           create: (context) => AuthCubit(_userAuthCubit),
         ),
-        BlocProvider(
-          create: (context) => ContentCubit(),
-        ),
+        BlocProvider(create: (context) => ContentCubit()),
         BlocProvider(create: (context) => NewformCubit())
       ],
       child: MaterialApp(
         title: 'LabLab',
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false, 
         theme: ThemeData(
           brightness: Brightness.dark,
         ),
         onGenerateRoute: DepInj.locator<AppRouter>().onGenerateRoute,
         initialRoute: DepInj.locator<AppRouter>().splashRoute,
-        // home: const SelectContentType(),
       ),
     );
   }

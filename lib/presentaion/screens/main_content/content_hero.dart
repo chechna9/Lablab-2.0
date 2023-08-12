@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:just_audio/just_audio.dart';
+
 import 'package:lablab2/data/models/chapter%20_model/chapter.dart';
 import 'package:lablab2/presentaion/screens/quiz/quiz_main.dart';
 import 'package:lablab2/res/res_extension.dart';
@@ -9,6 +12,9 @@ class ContentHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final player = AudioPlayer();
+    player.setUrl(chapter.audio.toString());
+
     return Column(
       children: [
         Container(
@@ -91,7 +97,18 @@ class ContentHero extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          if (player.playing) {
+                            player.stop();
+                            return;
+                          }
+                          player.play();
+                          return;
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
                       splashRadius: 20,
                       icon: Icon(
                         Icons.volume_up,
