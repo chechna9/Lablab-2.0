@@ -25,25 +25,32 @@ class FieldCard extends StatelessWidget {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                color: context.res.colors.green,
+                gradient: const LinearGradient(
+                  colors: [
+                    Color(0Xff46BB6E),
+                    Color(0Xff5DFA93),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: context.res.colors.black,
+                    color: context.res.colors.gray,
                     blurRadius: 10,
                     blurStyle: BlurStyle.inner,
-                    offset: const Offset(0, 5),
-                  ),
-                  BoxShadow(
-                    color: context.res.colors.black,
-                    blurRadius: 10,
-                    blurStyle: BlurStyle.inner,
-                    offset: const Offset(0, -5),
+                    offset: const Offset(0, 2),
                   ),
                   BoxShadow(
                     color: context.res.colors.gray,
-                    blurRadius: 1,
-                    blurStyle: BlurStyle.outer,
+                    blurRadius: 10,
+                    blurStyle: BlurStyle.inner,
+                    offset: const Offset(0, -2),
+                  ),
+                  BoxShadow(
+                    color: context.res.colors.black.withOpacity(0.5),
+                    blurRadius: 10,
+                    spreadRadius: 1,
                     offset: const Offset(0, 5),
                   ),
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lablab2/presentaion/screens/main/field_card.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
+import 'package:lablab2/presentaion/shared_widgets/custom_appbar.dart';
 import 'package:lablab2/presentaion/shared_widgets/search_input.dart';
 import 'package:lablab2/res/res_extension.dart';
 
@@ -70,40 +71,11 @@ class MainScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'My content',
-                          style: context.res.styles.heading.copyWith(
-                            color: context.res.colors.white,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Woah 3 days streak !',
-                              style: context.res.styles.body.copyWith(
-                                color: context.res.colors.gold,
-                              ),
-                            ),
-                            Image.asset(
-                              context.res.drawable.goldenStar,
-                              width: 25,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    Image.asset(
-                      context.res.drawable.avatar,
-                      width: context.res.dimens.avatarRadius,
-                    ),
-                  ],
+                CustomAppbar(
+                  title: 'My Content',
+                  backButtonColor: context.res.colors.white,
+                  titleColor: context.res.colors.black,
+                  showBackButton: false,
                 ),
                 const SizedBox(
                   height: 20,
