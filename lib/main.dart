@@ -12,6 +12,9 @@ import 'package:lablab2/bloc/bloc_observer.dart';
 import 'package:lablab2/bloc/user_auth/user_auth_cubit.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/firebase_options.dart';
+import 'package:lablab2/presentaion/screens/content/content_desc.dart';
+import 'package:lablab2/presentaion/screens/content/new_content.dart';
+import 'package:lablab2/presentaion/screens/content/select_content_type.dart';
 import 'package:lablab2/presentaion/screens/signIn&Up/sign_in_up.dart';
 import 'package:lablab2/presentaion/screens/signIn/sign_in.dart';
 import 'package:lablab2/presentaion/screens/signUp/sign_up.dart';
@@ -64,7 +67,8 @@ class _MyAppState extends State<MyApp> {
           brightness: Brightness.dark,
         ),
         onGenerateRoute: DepInj.locator<AppRouter>().onGenerateRoute,
-        initialRoute: DepInj.locator<AppRouter>().splashRoute,
+        // initialRoute: DepInj.locator<AppRouter>().splashRoute,
+        home: const ContentDetails(),
       ),
     );
   }

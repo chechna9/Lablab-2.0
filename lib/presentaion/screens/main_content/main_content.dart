@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:lablab2/data/models/chapter%20_model/chapter.dart';
 import 'package:lablab2/data/models/content_model/content_model.dart';
 import 'package:lablab2/presentaion/screens/main_content/swiper_content.dart';
@@ -7,7 +8,7 @@ import 'package:lablab2/presentaion/shared_widgets/custom_appbar.dart';
 import 'package:lablab2/res/res_extension.dart';
 
 class MainContent extends StatelessWidget {
-  const MainContent({super.key});
+  const MainContent({super.key}); 
 
   @override
   Widget build(BuildContext context) {
