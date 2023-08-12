@@ -18,6 +18,9 @@ class AppRouter {
   static const String _signUpRoute = '/signUp';
   static const String _mainRoute = '/main';
   static const String _mainContentRoute = '/mainContent';
+  static const String _newContentRoute = '/newContent';
+  static const String _contentDescRoute = '/contentDesc';
+  static const String _contentSubfieldRoute = '/contentSubfield';
 
   String get splashRoute => _splashRoute;
   String get losRoute => _losRoute;
@@ -25,6 +28,9 @@ class AppRouter {
   String get signUpRoute => _signUpRoute;
   String get mainRoute => _mainRoute;
   String get mainContentRoute => _mainContentRoute;
+  String get newContentRoute => _newContentRoute;
+  String get contentDescRoute => _contentDescRoute;
+  String get contentSubfieldRoute => _contentSubfieldRoute;
 
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -76,6 +82,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SafeArea(child: MainContent()),
         );
+
+        
       default:
         return null;
     }

@@ -1,9 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'package:lablab2/bloc/cubit/newform_cubit.dart';
+import 'package:lablab2/presentaion/screens/content/content_desc.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/res/res_extension.dart';
 
@@ -18,34 +20,40 @@ class SelectMoralScreen extends StatefulWidget {
   State<SelectMoralScreen> createState() => _SelectMoralScreenState();
 }
 
-List<String> selectedMoral = [];
+extension on String {
+  String get capitlaze {
+    return this[0].toUpperCase() + this.substring(1);
+  }
+}
 
 class _SelectMoralScreenState extends State<SelectMoralScreen> {
   @override
   Widget build(BuildContext context) {
+    List<String> selectedMoral = context.watch<NewformCubit>().morals;
+
     final list = List.generate(
       20,
       (index) {
         return ChoiceChip(
           selected: selectedMoral
-              .contains(Moral.values[index].toString().split(".")[1]),
+              .contains(Moral.values[index].toString().split(".")[1].capitlaze),
           onSelected: (value) {
             setState(() {
-              selectedMoral
-                      .contains(Moral.values[index].toString().split(".")[1])
-                  ? selectedMoral
-                      .remove(Moral.values[index].toString().split(".")[1])
-                  : selectedMoral
-                      .add(Moral.values[index].toString().split(".")[1]);
+              selectedMoral.contains(
+                      Moral.values[index].toString().split(".")[1].capitlaze)
+                  ? context.read<NewformCubit>().removeMorals(
+                      Moral.values[index].toString().split(".")[1].capitlaze)
+                  : context.read<NewformCubit>().addMorals(
+                      Moral.values[index].toString().split(".")[1].capitlaze);
             });
           },
           selectedColor: context.res.colors.lightPurple,
           showCheckmark: false,
           label: Text(
-            Moral.values[index].toString().split(".")[1],
+            Moral.values[index].toString().split(".")[1].capitlaze,
             style: context.res.styles.buttons.copyWith(
-                color: selectedMoral
-                        .contains(Moral.values[index].toString().split(".")[1])
+                color: selectedMoral.contains(
+                        Moral.values[index].toString().split(".")[1].capitlaze)
                     ? context.res.colors.white
                     : context.res.colors.purple,
                 fontSize: 12),
@@ -175,7 +183,11 @@ class _SelectMoralScreenState extends State<SelectMoralScreen> {
                   height: 20,
                 ),
                 MyTextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (list.isNotEmpty) {
+                      context.read<NewformCubit>().submit();
+                    }
+                  },
                   text: "Next",
                   bgColor: context.res.colors.green,
                 ),

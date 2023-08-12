@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'package:lablab2/presentaion/screens/content/content_desc.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/presentaion/shared_widgets/text_button.dart';
 import 'package:lablab2/res/res_extension.dart';
 
+import '../../../bloc/cubit/newform_cubit.dart';
 import '../../shared_widgets/custom_appbar.dart';
 
 class SelectContentType extends StatefulWidget {
@@ -121,7 +124,7 @@ class _SelectContentTypeState extends State<SelectContentType> {
                 ),
                 const Spacer(),
                 Text(
-                  "Lorem ipsum dolor sit amet consectetur. Neque sit vitae nunc mi varius scelerisque turpis.",
+                  "What type of content do you want to create?",
                   style: context.res.styles.body,
                   textAlign: TextAlign.center,
                 ),
@@ -141,17 +144,26 @@ class _SelectContentTypeState extends State<SelectContentType> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<NewformCubit>().setType("Story");
+                          setState(() {});
+                        },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: context.res.colors.white,
+                          backgroundColor:
+                              context.read<NewformCubit>().ktype == "Story"
+                                  ? context.res.colors.purple
+                                  : context.res.colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         child: Text(
                           "Story",
-                          style: context.res.styles.buttons
-                              .copyWith(color: context.res.colors.purple),
+                          style: context.res.styles.buttons.copyWith(
+                            color: context.read<NewformCubit>().ktype == "Story"
+                                ? context.res.colors.white
+                                : context.res.colors.purple,
+                          ),
                         ),
                       ),
                     ),
@@ -160,17 +172,27 @@ class _SelectContentTypeState extends State<SelectContentType> {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<NewformCubit>().setType("Text Book");
+                          setState(() {});
+                        },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: context.res.colors.white,
+                          backgroundColor:
+                              context.read<NewformCubit>().ktype == "Text Book"
+                                  ? context.res.colors.purple
+                                  : context.res.colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         child: Text(
                           "Text Book",
-                          style: context.res.styles.buttons
-                              .copyWith(color: context.res.colors.purple),
+                          style: context.res.styles.buttons.copyWith(
+                            color: context.read<NewformCubit>().ktype ==
+                                    "Text Book"
+                                ? context.res.colors.white
+                                : context.res.colors.purple,
+                          ),
                         ),
                       ),
                     ),
@@ -180,7 +202,11 @@ class _SelectContentTypeState extends State<SelectContentType> {
                   height: 20,
                 ),
                 MyTextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const ContentDetails()),
+                    );
+                  },
                   text: "Next",
                   bgColor: context.res.colors.green,
                 ),
