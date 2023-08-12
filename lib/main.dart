@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:lablab2/bloc/auth/auth_cubit.dart';
 import 'package:lablab2/bloc/bloc_observer.dart';
+import 'package:lablab2/bloc/content/content_cubit.dart';
 import 'package:lablab2/bloc/user_auth/user_auth_cubit.dart';
 import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/firebase_options.dart';
@@ -55,6 +56,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => AuthCubit(_userAuthCubit),
+        ),
+        BlocProvider(
+          create: (context) => ContentCubit(),
         ),
       ],
       child: MaterialApp(

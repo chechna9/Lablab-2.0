@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lablab2/bloc/content/content_cubit.dart';
+import 'package:lablab2/data/models/content_model/content_model.dart';
+import 'package:lablab2/dep_inj.dart';
 import 'package:lablab2/presentaion/screens/main/field_card.dart';
 import 'package:lablab2/presentaion/shared_widgets/circle.dart';
 import 'package:lablab2/presentaion/shared_widgets/custom_appbar.dart';
 import 'package:lablab2/presentaion/shared_widgets/search_input.dart';
 import 'package:lablab2/res/res_extension.dart';
+import 'package:lablab2/routes/app_router.dart';
+import 'package:lablab2/routes/screens_enum.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ContentCubit>().getContent();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,22 +114,53 @@ class MainScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Expanded(
-                  child: Container(
-                    // clipBehavior: Clip.hardEdge,
+                  child: BlocBuilder<ContentCubit, ContentState>(
+                    builder: (context, state) {
+                      if (state is ContentLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (state is ContentError) {
+                        return const Center(
+                          child: Text("Error"),
+                        );
+                      }
+                      if (state is ContentLoaded && state.listContent.isEmpty) {
+                        return const Center(
+                          child: Text("No content"),
+                        );
+                      }
+                      if (state is ContentLoaded) {
+                        return Container(
+                          // clipBehavior: Clip.hardEdge,
 
-                    decoration: BoxDecoration(
-                      color: context.res.colors.lightPurple,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: ListView(
-                      physics: const BouncingScrollPhysics(),
-                      children: const [
-                        FieldCard(),
-                        FieldCard(),
-                        FieldCard(),
-                        FieldCard()
-                      ],
-                    ),
+                          decoration: BoxDecoration(
+                            color: context.res.colors.lightPurple,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: state.listContent.length,
+                            itemBuilder: (context, index) {
+                              ContentModel content = state.listContent[index];
+                              return FieldCard(
+                                content: content,
+                                onSelect: () {
+                                  context
+                                      .read<ContentCubit>()
+                                      .selectContent(content);
+                                  DepInj.locator
+                                      .get<AppRouter>()
+                                      .push(context, Screens.mainContent);
+                                },
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      return const SizedBox();
+                    },
                   ),
                 ),
                 Align(

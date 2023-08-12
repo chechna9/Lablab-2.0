@@ -12,9 +12,6 @@ class ContentModel {
     required this.chapters,
   });
 
-  @override
-  String toString() => 'ContentModel(title: $title, chapters: $chapters)';
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'title': title,
@@ -26,7 +23,7 @@ class ContentModel {
     return ContentModel(
       title: map['title'] as String,
       chapters: List<Chapter>.from(
-        (map['chapters'] as List<int>).map<Chapter>(
+        (map['chapters'] as List<dynamic>).map<Chapter>(
           (x) => Chapter.fromMap(x as Map<String, dynamic>),
         ),
       ),

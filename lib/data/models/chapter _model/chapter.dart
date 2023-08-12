@@ -11,18 +11,6 @@ class Chapter {
     required this.image,
   });
 
-  Chapter copyWith({
-    String? chapterTitle,
-    String? content,
-    String? image,
-  }) {
-    return Chapter(
-      chapterTitle: chapterTitle ?? this.chapterTitle,
-      content: content ?? this.content,
-      image: image ?? this.image,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'chapterTitle': chapterTitle,
@@ -33,8 +21,8 @@ class Chapter {
 
   factory Chapter.fromMap(Map<String, dynamic> map) {
     return Chapter(
-      chapterTitle: map['text']['chapterTitle'] as String,
-      content: map['text']['content'] as String,
+      chapterTitle: map['chapterTitle'] as String,
+      content: map['content'] as String,
       image: map['image'] as String,
     );
   }
@@ -43,20 +31,4 @@ class Chapter {
 
   factory Chapter.fromJson(String source) =>
       Chapter.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  bool operator ==(covariant Chapter other) {
-    if (identical(this, other)) return true;
-
-    return other.chapterTitle == chapterTitle &&
-        other.content == content &&
-        other.image == image;
-  }
-
-  @override
-  int get hashCode => chapterTitle.hashCode ^ content.hashCode ^ image.hashCode;
-
-  @override
-  String toString() =>
-      'Chapter(chapterTitle: $chapterTitle, content: $content, image: $image)';
 }

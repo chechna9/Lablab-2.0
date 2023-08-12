@@ -11,8 +11,11 @@ class ContentHero extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 300,
-          height: 200,
+          // width: context.res.dimens.screenWidth / 4,
+          height: context.res.dimens.screenWidth / 2,
+          margin: EdgeInsets.symmetric(
+            horizontal: 10,
+          ),
           padding: const EdgeInsets.symmetric(
             vertical: 10,
             horizontal: 10,
@@ -47,12 +50,17 @@ class ContentHero extends StatelessWidget {
                 offset: const Offset(0, 5),
               ),
             ],
+            image: DecorationImage(
+              image: NetworkImage(chapter.image),
+              fit: BoxFit.cover,
+            ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                child: Image.network(chapter.image),
-              ),
+              // Expanded(
+              //   child: Image.network(chapter.image),
+              // ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Row(
