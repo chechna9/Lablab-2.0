@@ -108,7 +108,7 @@ class _MainScreenState extends State<MainScreen> {
                   height: 20,
                 ),
                 Text(
-                  "Lorem ipsum dolor sit amet consectetur. Neque sit vitae nunc mi varius scelerisque turpis.",
+                  "Ready for learning? Let's go!",
                   style: context.res.styles.body,
                   textAlign: TextAlign.center,
                 ),
