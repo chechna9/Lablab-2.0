@@ -28,6 +28,9 @@ class _QuizOPtionCardState extends State<QuizOPtionCard> {
               ? context.res.colors.green
               : context.res.colors.red;
         });
+        if (widget.option.isCorrect) {
+          Navigator.of(context).pop();
+        }
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),

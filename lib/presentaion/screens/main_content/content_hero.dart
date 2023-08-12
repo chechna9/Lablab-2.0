@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lablab2/data/models/chapter%20_model/chapter.dart';
+import 'package:lablab2/presentaion/screens/quiz/quiz_main.dart';
 import 'package:lablab2/res/res_extension.dart';
 
 class ContentHero extends StatelessWidget {
@@ -64,7 +65,16 @@ class ContentHero extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => QuizMain(
+                              chapterContent: chapter.content,
+                            ),
+                          ),
+                        );
+                      },
                       splashRadius: 20,
                       icon: Icon(
                         Icons.question_mark_rounded,
