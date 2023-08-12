@@ -73,8 +73,7 @@ class MainScreen extends StatelessWidget {
               children: [
                 CustomAppbar(
                   title: 'My Content',
-                  backButtonColor: context.res.colors.white,
-                  titleColor: context.res.colors.black,
+                  titleColor: context.res.colors.white,
                   showBackButton: false,
                 ),
                 const SizedBox(
