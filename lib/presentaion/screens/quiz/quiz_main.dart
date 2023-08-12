@@ -9,7 +9,8 @@ import 'package:lablab2/presentaion/shared_widgets/custom_appbar.dart';
 import 'package:lablab2/res/res_extension.dart';
 
 class QuizMain extends StatelessWidget {
-  const QuizMain({super.key});
+  final String chapterContent;
+  const QuizMain({super.key, required this.chapterContent});
 
   @override
   Widget build(BuildContext context) {
@@ -71,37 +72,41 @@ class QuizMain extends StatelessWidget {
         ),
       ),
     ];
-    return Material(
-      color: context.res.colors.white,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          ...backgroundCircles,
-          Padding(
-            padding: EdgeInsets.only(
-              left: context.res.dimens.mainPadding,
-              right: context.res.dimens.mainPadding,
-              top: context.res.dimens.topMargin,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomAppbar(
-                    title: 'quiz',
-                    backButtonColor: context.res.colors.black,
-                    titleColor: context.res.colors.black,
-                    onBackButtonPressed: () {}),
-                const SizedBox(
-                  height: 20,
-                ),
-                //  quiz content
-                Expanded(
-                  child: QuizContent(),
-                ),
-              ],
-            ),
-          )
-        ],
+    return SafeArea(
+      child: Material(
+        color: context.res.colors.white,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ...backgroundCircles,
+            Padding(
+              padding: EdgeInsets.only(
+                left: context.res.dimens.mainPadding,
+                right: context.res.dimens.mainPadding,
+                top: context.res.dimens.topMargin,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomAppbar(
+                      title: 'Quiz',
+                      backButtonColor: context.res.colors.black,
+                      titleColor: context.res.colors.black,
+                      onBackButtonPressed: () {}),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //  quiz content
+                  Expanded(
+                    child: QuizContent(
+                      chapterContent: chapterContent,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

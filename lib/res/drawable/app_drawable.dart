@@ -21,4 +21,7 @@ class AppDrawable extends Drawable {
 
   @override
   String get goldenStar => '${imagesPath}golden_star.png';
+
+  @override
+  String get logo => '${imagesPath}logo.svg';
 }

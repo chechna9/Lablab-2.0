@@ -5,10 +5,12 @@ class Chapter {
   String chapterTitle;
   String content;
   String image;
+  String? audio;
   Chapter({
     required this.chapterTitle,
     required this.content,
     required this.image,
+    this.audio,
   });
 
   Map<String, dynamic> toMap() {
@@ -16,6 +18,7 @@ class Chapter {
       'chapterTitle': chapterTitle,
       'content': content,
       'image': image,
+      'audio': audio,
     };
   }
 
@@ -24,6 +27,7 @@ class Chapter {
       chapterTitle: map['chapterTitle'] as String,
       content: map['content'] as String,
       image: map['image'] as String,
+      audio: map['audio'] as String?,
     );
   }
 

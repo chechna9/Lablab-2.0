@@ -24,7 +24,7 @@ class ContentModel {
   factory ContentModel.fromMap(Map<String, dynamic> map) {
     return ContentModel(
       title: map['title'] as String,
-      id: map['id'] as String,
+      id: map['id'] as String?,
       chapters: List<Chapter>.from(
         (map['chapters'] as List<dynamic>).map<Chapter>(
           (x) => Chapter.fromMap(x as Map<String, dynamic>),

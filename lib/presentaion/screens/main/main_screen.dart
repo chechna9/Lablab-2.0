@@ -180,14 +180,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: IconButton(
                       iconSize: 60,
                       splashRadius: 35,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => QuizMain(),
-                          ),
-                        );
-                      },
+                      onPressed: () async {},
                       icon: const Icon(
                         Icons.add_circle_rounded,
                       ),

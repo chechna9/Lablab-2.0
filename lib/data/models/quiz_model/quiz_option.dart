@@ -10,14 +10,14 @@ class QuizOption {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'option': option,
-      'isCorrect': isCorrect,
+      'is_correct': isCorrect,
     };
   }
 
   factory QuizOption.fromMap(Map<String, dynamic> map) {
     return QuizOption(
       option: map['option'] as String,
-      isCorrect: map['isCorrect'] as bool,
+      isCorrect: map['is_correct'] as bool,
     );
   }
 
